@@ -3,6 +3,6 @@ using HumanResources.Services.Employees.Domain.Entities;
 
 namespace HumanResources.Services.Employees.Application.Repositories;
 
-public interface IEmployeeRepository : IRepositoryBase<Employee>
+public interface IEmployeeRepository : IRepositoryBase<Employee, Guid>
 {
 }

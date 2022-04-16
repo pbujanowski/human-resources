@@ -7,15 +7,14 @@ namespace HumanResources.Services.Employees.Infrastructure.Wrappers;
 public class RepositoryWrapper : IRepositoryWrapper
 {
     private readonly DbContext _dbContext;
-    private readonly IEmployeeRepository _employees;
 
     public RepositoryWrapper(DbContext dbContext, IEmployeeRepository employees)
     {
         _dbContext = dbContext;
-        _employees = employees;
+        Employees = employees;
     }
 
-    public IEmployeeRepository Employees => _employees;
+    public IEmployeeRepository Employees { get; }
 
     public void SaveChanges()
     {

@@ -2,7 +2,7 @@
 
 namespace HumanResources.Common.Library.Abstractions.Repositories;
 
-public interface IRepositoryBase<TEntity>
+public interface IRepositoryBase<TEntity, TKey>
 {
     TEntity Create(TEntity entity);
 
@@ -11,6 +11,10 @@ public interface IRepositoryBase<TEntity>
     IQueryable<TEntity> FindAll();
 
     IQueryable<TEntity> FindByCondition(Expression<Func<TEntity, bool>> condition);
+
+    TEntity? FindById(TKey id);
+
+    Task<TEntity?> FindByIdAsync(TKey id);
 
     TEntity Update(TEntity entity);
 }

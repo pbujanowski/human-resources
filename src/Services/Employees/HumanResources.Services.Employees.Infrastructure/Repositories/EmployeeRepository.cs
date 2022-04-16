@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace HumanResources.Services.Employees.Infrastructure.Repositories;
 
-public class EmployeeRepository : RepositoryBase<Employee>, IEmployeeRepository
+public class EmployeeRepository : RepositoryBase<Employee, Guid>, IEmployeeRepository
 {
     public EmployeeRepository(DbContext dbContext)
         : base(dbContext)
