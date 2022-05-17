@@ -18,12 +18,18 @@
       nzMode="inline"
       [nzInlineCollapsed]="isCollapsed"
       *ngFor="let route of routes">
-      <li nz-menu-item nzMatchRouter>
-        <a [routerLink]="route.path">
-          <i nz-icon [nzType]="route.icon"></i>
-          <span [translate]="'pages.' + route.key"></span>
-        </a>
-      </li>
+      <ul
+        nz-submenu
+        [nzTitle]="getRouteLabel(route.key)"
+        [nzIcon]="route.icon"
+        nzOpen>
+        <li nz-menu-item nzMatchRouter *ngFor="let child of route.children">
+          <a [routerLink]="child.path">
+            <i nz-icon [nzType]="child.icon"></i>
+            <span>{{ getRouteLabel(child.key) }}</span>
+          </a>
+        </li>
+      </ul>
     </ul>
   </nz-sider>
   <nz-layout>
@@ -33,7 +39,7 @@
           <i
             class="trigger"
             nz-icon
-            [nzType]="isCollapsed ? 'menu-unfold' : 'menu-fold'"></i>
+            [nzType]="isCollapsed ? 'double-right' : 'double-left'"></i>
         </span>
       </div>
     </nz-header>

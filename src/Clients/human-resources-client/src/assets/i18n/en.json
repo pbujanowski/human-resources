@@ -1,6 +1,9 @@
 {
   "brand": "Human Resources",
   "pages": {
-    "home": "Home"
+    "home": "Home",
+    "dashboard": "Dashboard",
+    "employees": "Employees",
+    "employeesList": "List"
   }
 }

@@ -15,7 +15,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AntDesignModule } from './ant-design';
 
 import { AppComponent } from './app.component';
-import { LayoutComponent } from './components/layout/layout.component';
+import { LayoutComponent } from './components';
 
 const HttpLoaderFactory = (http: HttpClient) => new TranslateHttpLoader(http);
 

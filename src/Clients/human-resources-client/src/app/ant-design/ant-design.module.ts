@@ -7,19 +7,13 @@ import { NzLayoutModule } from 'ng-zorro-antd/layout';
 import { NzMenuModule } from 'ng-zorro-antd/menu';
 import { NZ_ICONS, NzIconModule } from 'ng-zorro-antd/icon';
 import {
-  MenuFoldOutline,
-  MenuUnfoldOutline,
-  FormOutline,
   DashboardOutline,
+  DoubleLeftOutline,
+  DoubleRightOutline,
 } from '@ant-design/icons-angular/icons';
 
 const modules = [NzIconModule, NzLayoutModule, NzMenuModule];
-const icons = [
-  MenuFoldOutline,
-  MenuUnfoldOutline,
-  DashboardOutline,
-  FormOutline,
-];
+const icons = [DashboardOutline, DoubleLeftOutline, DoubleRightOutline];
 
 registerLocaleData(en);
 
