@@ -5,5 +5,13 @@
     "dashboard": "Dashboard",
     "employees": "Pracownicy",
     "employeesList": "Lista"
+  },
+  "models": {
+    "employee": {
+      "firstName": "Imię",
+      "lastName": "Nazwisko",
+      "personalIdNumber": "Numer identyfikacyjny",
+      "birthdate": "Data urodzenia"
+    }
   }
 }

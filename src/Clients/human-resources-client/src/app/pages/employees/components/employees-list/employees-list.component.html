@@ -1,1 +1,23 @@
-<p>employees-list works!</p>
+<nz-table #employeesTable [nzData]="employees" [nzLoading]="isLoading">
+  <thead>
+    <tr>
+      <th translate="models.employee.firstName"></th>
+      <th translate="models.employee.lastName"></th>
+      <th translate="models.employee.personalIdNumber"></th>
+      <th translate="models.employee.birthdate"></th>
+      <th>
+        <button nz-button nzShape="circle" (click)="getEmployees()">
+          <i nz-icon nzType="reload"></i>
+        </button>
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let employee of employeesTable.data">
+      <td>{{ employee.firstName }}</td>
+      <td>{{ employee.lastName }}</td>
+      <td>{{ employee.personalIdNumber }}</td>
+      <td>{{ employee.birthdate | date }}</td>
+    </tr>
+  </tbody>
+</nz-table>

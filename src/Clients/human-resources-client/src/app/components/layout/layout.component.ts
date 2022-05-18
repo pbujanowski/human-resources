@@ -36,7 +36,7 @@ export class LayoutComponent {
           key: 'employeesList',
           type: 'item',
           path: '/employees',
-          icon: 'list',
+          icon: 'unordered-list',
         },
       ],
     },
