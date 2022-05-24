@@ -1,6 +1,5 @@
 import { Component, Input } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
-import { lastValueFrom, Observable } from 'rxjs';
 
 @Component({
   selector: 'app-layout',
@@ -35,8 +34,14 @@ export class LayoutComponent {
         {
           key: 'employeesList',
           type: 'item',
-          path: '/employees',
+          path: '/employees/list',
           icon: 'unordered-list',
+        },
+        {
+          key: 'employeeAdd',
+          type: 'item',
+          path: '/employees/add',
+          icon: 'user-add',
         },
       ],
     },

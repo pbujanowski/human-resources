@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule, registerLocaleData } from '@angular/common';
+import { ReactiveFormsModule } from '@angular/forms';
 import en from '@angular/common/locales/en';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 
@@ -7,6 +8,9 @@ import { NZ_I18N } from 'ng-zorro-antd/i18n';
 import { en_US } from 'ng-zorro-antd/i18n';
 
 import { NzButtonModule } from 'ng-zorro-antd/button';
+import { NzDatePickerModule } from 'ng-zorro-antd/date-picker';
+import { NzFormModule } from 'ng-zorro-antd/form';
+import { NzInputModule } from 'ng-zorro-antd/input';
 import { NzLayoutModule } from 'ng-zorro-antd/layout';
 import { NzMenuModule } from 'ng-zorro-antd/menu';
 import { NzTableModule } from 'ng-zorro-antd/table';
@@ -18,6 +22,7 @@ import {
   HomeOutline,
   TeamOutline,
   UnorderedListOutline,
+  UserAddOutline,
 } from '@ant-design/icons-angular/icons';
 
 import {
@@ -43,7 +48,10 @@ const translateModuleConfig: TranslateModuleConfig = {
 
 const antDesignModules = [
   NzButtonModule,
+  NzDatePickerModule,
+  NzFormModule,
   NzIconModule,
+  NzInputModule,
   NzLayoutModule,
   NzMenuModule,
   NzTableModule,
@@ -55,6 +63,7 @@ const icons = [
   HomeOutline,
   TeamOutline,
   UnorderedListOutline,
+  UserAddOutline,
 ];
 
 registerLocaleData(en);
@@ -63,11 +72,17 @@ registerLocaleData(en);
   declarations: [],
   imports: [
     CommonModule,
+    ReactiveFormsModule,
     HttpClientModule,
     antDesignModules,
     TranslateModule.forRoot(translateModuleConfig),
   ],
-  exports: [antDesignModules, HttpClientModule, TranslateModule],
+  exports: [
+    antDesignModules,
+    ReactiveFormsModule,
+    HttpClientModule,
+    TranslateModule,
+  ],
   providers: [
     { provide: NZ_I18N, useValue: en_US },
     { provide: NZ_ICONS, useValue: icons },

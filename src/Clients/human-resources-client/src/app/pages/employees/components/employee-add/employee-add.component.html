@@ -1,0 +1,105 @@
+<form nz-form [formGroup]="employeeForm" (ngSubmit)="onFormSubmit()">
+  <nz-form-item>
+    <nz-form-label
+      [nzLg]="6"
+      [nzSm]="8"
+      [nzXs]="24"
+      nzRequired
+      nzFor="firstName">
+      {{ getEmployeeLabel('firstName') }}
+    </nz-form-label>
+    <nz-form-control
+      [nzSm]="16"
+      [nzXs]="24"
+      nzHasFeedback
+      [nzErrorTip]="firstNameError">
+      <input nz-input formControlName="firstName" id="firstName" />
+    </nz-form-control>
+    <ng-template #firstNameError let-control>
+      <ng-container *ngIf="control.hasError('required')">
+        {{ getValidation('firstName.required') }}
+      </ng-container>
+    </ng-template>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-label
+      [nzLg]="6"
+      [nzSm]="8"
+      [nzXs]="24"
+      nzRequired
+      nzFor="lastName">
+      {{ getEmployeeLabel('lastName') }}
+    </nz-form-label>
+    <nz-form-control
+      [nzSm]="16"
+      [nzXs]="24"
+      nzHasFeedback
+      [nzErrorTip]="lastNameError">
+      <input nz-input formControlName="lastName" id="lastName" />
+    </nz-form-control>
+    <ng-template #lastNameError let-control>
+      <ng-container *ngIf="control.hasError('required')">
+        {{ getValidation('lastName.required') }}
+      </ng-container>
+    </ng-template>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-label
+      [nzLg]="6"
+      [nzSm]="8"
+      [nzXs]="24"
+      nzRequired
+      nzFor="personalIdNumber">
+      {{ getEmployeeLabel('personalIdNumber') }}
+    </nz-form-label>
+    <nz-form-control
+      [nzSm]="16"
+      [nzXs]="24"
+      nzHasFeedback
+      [nzErrorTip]="personalIdNumberError">
+      <input
+        nz-input
+        formControlName="personalIdNumber"
+        id="personalIdNumber" />
+    </nz-form-control>
+    <ng-template #personalIdNumberError let-control>
+      <ng-container *ngIf="control.hasError('required')">
+        {{ getValidation('personalIdNumber.required') }}
+      </ng-container>
+    </ng-template>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-label
+      [nzLg]="6"
+      [nzSm]="8"
+      [nzXs]="24"
+      nzRequired
+      nzFor="birthdate">
+      {{ getEmployeeLabel('birthdate') }}
+    </nz-form-label>
+    <nz-form-control
+      [nzSm]="16"
+      [nzXs]="24"
+      nzHasFeedback
+      [nzErrorTip]="birthdateError">
+      <nz-date-picker
+        formControlName="birthdate"
+        id="birthdate"></nz-date-picker>
+    </nz-form-control>
+    <ng-template #birthdateError let-control>
+      <ng-container *ngIf="control.hasError('required')">
+        {{ getValidation('birthdate.required') }}
+      </ng-container>
+    </ng-template>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-control
+      [nzLg]="{ span: 8, offset: 6 }"
+      [nzSm]="{ span: 16, offset: 8 }"
+      [nzXs]="{ span: 24, offset: 0 }">
+      <button nz-button nzType="primary">
+        {{ getTranslate('common.submit') }}
+      </button>
+    </nz-form-control>
+  </nz-form-item>
+</form>

@@ -4,14 +4,32 @@
     "home": "Home",
     "dashboard": "Dashboard",
     "employees": "Employees",
-    "employeesList": "List"
+    "employeesList": "List",
+    "employeeAdd": "Add"
   },
   "models": {
     "employee": {
       "firstName": "First name",
       "lastName": "Last name",
       "personalIdNumber": "Personal ID number",
-      "birthdate": "Birthdate"
+      "birthdate": "Birthdate",
+      "validation": {
+        "firstName": {
+          "required": "First name is required."
+        },
+        "lastName": {
+          "required": "Last name is required."
+        },
+        "personalIdNumber": {
+          "required": "Personal ID number is required."
+        },
+        "birthdate": {
+          "required": "Birthdate is required."
+        }
+      }
     }
+  },
+  "common": {
+    "submit": "Submit"
   }
 }
