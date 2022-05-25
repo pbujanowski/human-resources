@@ -6,11 +6,18 @@ import { Employee } from '../models';
   providedIn: 'root',
 })
 export class EmployeeService {
-  public getEmployees = () =>
-    this.http.get<Employee[]>('http://localhost:5213/api/employees');
+  private readonly _apiUrl = 'http://localhost:5213/api/employees';
+
+  public getEmployees = () => this.http.get<Employee[]>(this._apiUrl);
 
   public createEmployee = (employee: Employee) =>
-    this.http.post<Employee>('http://localhost:5213/api/employees', employee);
+    this.http.post<Employee>(this._apiUrl, employee);
+
+  public updateEmployee = (employee: Employee) =>
+    this.http.put<Employee>(`${this._apiUrl}/${employee.id}`, employee);
+
+  public deleteEmployee = (employeeId: string) =>
+    this.http.delete<Employee>(`${this._apiUrl}/${employeeId}`);
 
   constructor(private http: HttpClient) {}
 }

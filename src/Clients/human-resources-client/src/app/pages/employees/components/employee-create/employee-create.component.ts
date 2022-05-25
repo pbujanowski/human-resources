@@ -1,15 +1,22 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { TranslateService } from '@ngx-translate/core';
 import { en_US, NzI18nService, pl_PL } from 'ng-zorro-antd/i18n';
+import { NzMessageService } from 'ng-zorro-antd/message';
 import { Employee, EmployeeService } from 'src/app/shared';
 
 @Component({
-  selector: 'app-employee-add',
-  templateUrl: './employee-add.component.html',
-  styleUrls: ['./employee-add.component.css'],
+  selector: 'app-employee-create',
+  templateUrl: './employee-create.component.html',
+  styleUrls: ['./employee-create.component.css'],
 })
-export class EmployeeAddComponent implements OnInit {
+export class EmployeeCreateComponent implements OnInit {
+  @Output()
+  public created = new EventEmitter();
+
+  @Output()
+  public failed = new EventEmitter();
+
   public employeeForm = new FormGroup({
     firstName: new FormControl('', [Validators.required]),
     lastName: new FormControl('', [Validators.required]),
@@ -37,15 +44,10 @@ export class EmployeeAddComponent implements OnInit {
     return this.getTranslate(`models.employee.${key}`);
   };
 
-  public getTranslate = (key: string) => {
-    let label = '';
-    this.translate.get(key).subscribe(value => (label = value));
-    return label;
-  };
+  public getTranslate = (key: string) => this.translate.instant(key);
 
-  public getValidation = (key: string) => {
-    return this.getTranslate(`models.employee.validation.${key}`);
-  };
+  public getValidation = (key: string) =>
+    this.getTranslate(`models.employee.validation.${key}`);
 
   public onFormSubmit = () => {
     if (this.employeeForm.valid) {
@@ -56,8 +58,18 @@ export class EmployeeAddComponent implements OnInit {
         birthdate: this.birthdate?.value,
       };
       this.employeeService.createEmployee(employee).subscribe({
-        next: res => console.log(`CREATED: ${JSON.stringify(res)}`),
-        error: err => console.error(err),
+        next: () => {
+          this.showSuccess(
+            this.getTranslate('models.employee.message.employeeCreated')
+          );
+          this.created.emit();
+        },
+        error: () => {
+          this.showError(
+            this.getTranslate('models.employee.error.failedToCreateEmployee')
+          );
+          this.failed.emit();
+        },
       });
     } else {
       Object.values(this.employeeForm.controls).forEach(control => {
@@ -67,6 +79,14 @@ export class EmployeeAddComponent implements OnInit {
         }
       });
     }
+  };
+
+  private showSuccess = (message: string) => {
+    this.message.success(message);
+  };
+
+  private showError = (message: string) => {
+    this.message.error(message);
   };
 
   private getNzLocale = () => {
@@ -83,6 +103,7 @@ export class EmployeeAddComponent implements OnInit {
   constructor(
     private translate: TranslateService,
     private i18n: NzI18nService,
+    private message: NzMessageService,
     private employeeService: EmployeeService
   ) {}
 

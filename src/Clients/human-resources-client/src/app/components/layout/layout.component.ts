@@ -37,21 +37,12 @@ export class LayoutComponent {
           path: '/employees/list',
           icon: 'unordered-list',
         },
-        {
-          key: 'employeeAdd',
-          type: 'item',
-          path: '/employees/add',
-          icon: 'user-add',
-        },
       ],
     },
   ];
 
-  public getRouteLabel = (key: string) => {
-    let label = '';
-    this.translate.get(`pages.${key}`).subscribe(value => (label = value));
-    return label;
-  };
+  public getRouteLabel = (key: string) =>
+    this.translate.instant(`pages.${key}`);
 
   constructor(public translate: TranslateService) {}
 }

@@ -13,6 +13,9 @@ import { NzFormModule } from 'ng-zorro-antd/form';
 import { NzInputModule } from 'ng-zorro-antd/input';
 import { NzLayoutModule } from 'ng-zorro-antd/layout';
 import { NzMenuModule } from 'ng-zorro-antd/menu';
+import { NzMessageModule } from 'ng-zorro-antd/message';
+import { NzModalModule } from 'ng-zorro-antd/modal';
+import { NzPopconfirmModule } from 'ng-zorro-antd/popconfirm';
 import { NzTableModule } from 'ng-zorro-antd/table';
 import { NZ_ICONS, NzIconModule } from 'ng-zorro-antd/icon';
 import {
@@ -54,6 +57,9 @@ const antDesignModules = [
   NzInputModule,
   NzLayoutModule,
   NzMenuModule,
+  NzMessageModule,
+  NzModalModule,
+  NzPopconfirmModule,
   NzTableModule,
 ];
 const icons = [

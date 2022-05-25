@@ -6,9 +6,14 @@
       <th translate="models.employee.personalIdNumber"></th>
       <th translate="models.employee.birthdate"></th>
       <th>
-        <button nz-button nzShape="circle" (click)="getEmployees()">
-          <i nz-icon nzType="reload"></i>
-        </button>
+        <nz-button-group>
+          <button nz-button nzShape="circle" (click)="onRefreshListClick()">
+            <i nz-icon nzType="reload"></i>
+          </button>
+          <button nz-button nzShape="circle" (click)="onCreateEmployeeClick()">
+            <i nz-icon nzType="plus"></i>
+          </button>
+        </nz-button-group>
       </th>
     </tr>
   </thead>
@@ -18,6 +23,34 @@
       <td>{{ employee.lastName }}</td>
       <td>{{ employee.personalIdNumber }}</td>
       <td>{{ employee.birthdate | date }}</td>
+      <td>
+        <button
+          nz-button
+          nz-popconfirm
+          [nzPopconfirmTitle]="
+            getTranslate('models.employee.confirmation.deleteEmployee')
+          "
+          [nzOkText]="getTranslate('common.yes')"
+          [nzCancelText]="getTranslate('common.no')"
+          nzOkType="danger"
+          nzPopconfirmPlacement="bottom"
+          nzShape="circle"
+          nzDanger
+          (nzOnConfirm)="onDeleteEmployeeClick(employee.id)">
+          <i nz-icon nzType="delete"></i>
+        </button>
+      </td>
     </tr>
   </tbody>
 </nz-table>
+
+<nz-modal
+  [(nzVisible)]="isModalVisible"
+  [nzTitle]="this.getTranslate('models.employee.message.createEmployee')"
+  [nzFooter]="[]"
+  [nzWidth]="768"
+  (nzOnCancel)="onModalClose()">
+  <ng-container *nzModalContent>
+    <app-employee-create (created)="onEmployeeCreated()"></app-employee-create>
+  </ng-container>
+</nz-modal>

@@ -4,15 +4,12 @@ import { RouterModule, Routes } from '@angular/router';
 
 import { SharedModule } from 'src/app/shared';
 import { EmployeesListComponent } from './components';
-import { EmployeeAddComponent } from './components/employee-add/employee-add.component';
+import { EmployeeCreateComponent } from './components/employee-create/employee-create.component';
 
-const routes: Routes = [
-  { path: 'list', component: EmployeesListComponent },
-  { path: 'add', component: EmployeeAddComponent },
-];
+const routes: Routes = [{ path: 'list', component: EmployeesListComponent }];
 
 @NgModule({
-  declarations: [EmployeesListComponent, EmployeeAddComponent],
+  declarations: [EmployeesListComponent, EmployeeCreateComponent],
   imports: [CommonModule, RouterModule.forChild(routes), SharedModule],
   exports: [RouterModule],
 })

@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { TranslateService } from '@ngx-translate/core';
+import { NzMessageService } from 'ng-zorro-antd/message';
 import { Employee, EmployeeService } from 'src/app/shared';
 
 @Component({
@@ -9,20 +11,69 @@ import { Employee, EmployeeService } from 'src/app/shared';
 export class EmployeesListComponent implements OnInit {
   public employees: Employee[] = [];
 
+  public isModalVisible = false;
+
   public isLoading = false;
 
   public getEmployees = () => {
     try {
       this.isLoading = true;
-      this.employeeService
-        .getEmployees()
-        .subscribe(res => (this.employees = [...res]));
+      this.employeeService.getEmployees().subscribe({
+        next: (res: Employee[]) => (this.employees = [...res]),
+        error: () =>
+          this.showError(
+            this.getTranslate(
+              'models.employee.error.failedToLoadListOfEmployees'
+            )
+          ),
+      });
     } finally {
       this.isLoading = false;
     }
   };
 
-  constructor(private employeeService: EmployeeService) {}
+  public deleteEmployee = (id: string) => {
+    this.employeeService.deleteEmployee(id).subscribe({
+      next: () => this.getEmployees(),
+      error: () =>
+        this.showError(
+          this.getTranslate('models.employee.error.failedToDeleteEmployee')
+        ),
+    });
+  };
+
+  public onRefreshListClick = () => this.getEmployees();
+
+  public onCreateEmployeeClick = () => {
+    this.isModalVisible = true;
+  };
+
+  public onDeleteEmployeeClick = (id?: string) => {
+    if (id) {
+      this.deleteEmployee(id);
+    }
+  };
+
+  public onEmployeeCreated = () => {
+    this.isModalVisible = false;
+    this.getEmployees();
+  };
+
+  public onModalClose = () => {
+    this.isModalVisible = false;
+  };
+
+  public getTranslate = (key: string) => this.translate.instant(key);
+
+  private showError = (message: string) => {
+    this.message.error(message);
+  };
+
+  constructor(
+    private employeeService: EmployeeService,
+    private message: NzMessageService,
+    private translate: TranslateService
+  ) {}
 
   ngOnInit(): void {
     this.getEmployees();
