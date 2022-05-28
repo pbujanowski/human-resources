@@ -11,7 +11,11 @@ import { Employee, EmployeeService } from 'src/app/shared';
 export class EmployeesListComponent implements OnInit {
   public employees: Employee[] = [];
 
-  public isModalVisible = false;
+  public selectedEmployee?: Employee;
+
+  public isEmployeeCreateModalVisible = false;
+
+  public isEmployeeUpdateModalVisible = false;
 
   public isLoading = false;
 
@@ -45,7 +49,12 @@ export class EmployeesListComponent implements OnInit {
   public onRefreshListClick = () => this.getEmployees();
 
   public onCreateEmployeeClick = () => {
-    this.isModalVisible = true;
+    this.isEmployeeCreateModalVisible = true;
+  };
+
+  public onUpdateEmployeeClick = (employee?: Employee) => {
+    this.selectedEmployee = employee;
+    this.isEmployeeUpdateModalVisible = true;
   };
 
   public onDeleteEmployeeClick = (id?: string) => {
@@ -55,12 +64,21 @@ export class EmployeesListComponent implements OnInit {
   };
 
   public onEmployeeCreated = () => {
-    this.isModalVisible = false;
+    this.isEmployeeCreateModalVisible = false;
     this.getEmployees();
   };
 
-  public onModalClose = () => {
-    this.isModalVisible = false;
+  public onEmployeeUpdated = () => {
+    this.isEmployeeUpdateModalVisible = false;
+    this.getEmployees();
+  };
+
+  public onEmployeeCreateModalClose = () => {
+    this.isEmployeeCreateModalVisible = false;
+  };
+
+  public onEmployeeUpdateModalClose = () => {
+    this.isEmployeeUpdateModalVisible = false;
   };
 
   public getTranslate = (key: string) => this.translate.instant(key);

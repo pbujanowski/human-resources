@@ -28,7 +28,9 @@
       },
       "message": {
         "createEmployee": "Add employee",
-        "employeeCreated": "Employee added."
+        "updateEmployee": "Update employee",
+        "employeeCreated": "Employee added.",
+        "employeeUpdated": "Employee updated."
       },
       "error": {
         "failedToLoadListOfEmployees": "Failed to load list of employees.",

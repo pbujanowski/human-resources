@@ -28,7 +28,9 @@
       },
       "message": {
         "createEmployee": "Dodaj pracownika",
-        "employeeCreated": "Dodano pracownika"
+        "updateEmployee": "Edytuj pracownika",
+        "employeeCreated": "Dodano pracownika",
+        "employeeUpdated": "Edytowano pracownika"
       },
       "error": {
         "failedToLoadListOfEmployees": "Nie udało się wczytać listy pracowników.",

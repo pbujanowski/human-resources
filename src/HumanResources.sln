@@ -17,7 +17,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HumanResources.Common.Libra
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HumanResources.Services.Employees.Infrastructure", "Services\Employees\HumanResources.Services.Employees.Infrastructure\HumanResources.Services.Employees.Infrastructure.csproj", "{C9D3FCE0-3AC7-4CE3-B703-303041977AF9}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HumanResources.Services.Employees.API", "Services\Employees\HumanResources.Services.Employees.Api\HumanResources.Services.Employees.API.csproj", "{247BDB89-5A4C-45A1-96A9-DF33A38CE0CC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HumanResources.Services.Employees.API", "Services\Employees\HumanResources.Services.Employees.API\HumanResources.Services.Employees.API.csproj", "{247BDB89-5A4C-45A1-96A9-DF33A38CE0CC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

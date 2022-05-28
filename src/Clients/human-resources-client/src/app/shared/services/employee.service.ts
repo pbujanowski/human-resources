@@ -10,6 +10,9 @@ export class EmployeeService {
 
   public getEmployees = () => this.http.get<Employee[]>(this._apiUrl);
 
+  public getEmployeeById = (employeeId: string) =>
+    this.http.get<Employee>(`${this._apiUrl}/${employeeId}`);
+
   public createEmployee = (employee: Employee) =>
     this.http.post<Employee>(this._apiUrl, employee);
 
