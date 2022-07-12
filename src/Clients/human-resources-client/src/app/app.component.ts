@@ -15,12 +15,12 @@ export class AppComponent implements OnInit {
   constructor(
     private translate: TranslateService,
     private oidc: OidcSecurityService
-  ) {
-    translate.setTranslation('en', defaultLanguage);
-    translate.setDefaultLang('en');
-  }
+  ) {}
 
   ngOnInit() {
+    this.translate.setTranslation('en', defaultLanguage);
+    this.translate.setDefaultLang('en');
+
     this.oidc.checkAuth().subscribe(({ isAuthenticated }) => {
       if (!isAuthenticated) {
         this.oidc.authorize();

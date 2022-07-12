@@ -1,15 +1,16 @@
 import { NgModule } from '@angular/core';
 import { AuthModule } from 'angular-auth-oidc-client';
+import { environment } from 'src/environments/environment';
 
 @NgModule({
   imports: [
     AuthModule.forRoot({
       config: {
-        authority: 'http://localhost:8080/realms/human-resources',
+        authority: environment.authority,
         redirectUrl: window.location.origin,
         postLogoutRedirectUri: window.location.origin,
-        clientId: 'human-resources-client',
-        scope: 'openid profile', // 'openid profile offline_access ' + your scopes
+        clientId: environment.clientId,
+        scope: environment.scope,
         responseType: 'code',
         silentRenew: true,
         useRefreshToken: true,
@@ -19,4 +20,4 @@ import { AuthModule } from 'angular-auth-oidc-client';
   ],
   exports: [AuthModule],
 })
-export class AuthConfigModule {}
+export class AuthorizationModule {}
