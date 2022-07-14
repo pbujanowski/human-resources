@@ -1,5 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
+import { OidcSecurityService } from 'angular-auth-oidc-client';
 
 @Component({
   selector: 'app-layout',
@@ -9,6 +10,10 @@ import { TranslateService } from '@ngx-translate/core';
 export class LayoutComponent {
   @Input()
   public title?: string;
+
+  public get user() {
+    return this.oidc.getUserData();
+  }
 
   public isCollapsed = false;
 
@@ -41,8 +46,16 @@ export class LayoutComponent {
     },
   ];
 
-  public getRouteLabel = (key: string) =>
-    this.translate.instant(`pages.${key}`);
+  public getRouteLabel = (key: string) => this.getTranslation(`pages.${key}`);
 
-  constructor(public translate: TranslateService) {}
+  public getTranslation = (key: string) => this.translate.instant(key);
+
+  public logInUser = () => this.oidc.authorize();
+
+  public logOutUser = () => this.oidc.logoff();
+
+  constructor(
+    public translate: TranslateService,
+    private oidc: OidcSecurityService
+  ) {}
 }

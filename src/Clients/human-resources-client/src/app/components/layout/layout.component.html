@@ -41,6 +41,29 @@
             nz-icon
             [nzType]="isCollapsed ? 'double-right' : 'double-left'"></i>
         </span>
+
+        <ng-container *ngIf="user; then loggedIn; else loggedOut">
+        </ng-container>
+
+        <ng-template #loggedIn>
+          <button nz-button nz-dropdown [nzDropdownMenu]="menu">
+            <i nz-icon nzType="user"></i>
+            <span>{{ user.email }}</span>
+          </button>
+          <nz-dropdown-menu #menu="nzDropdownMenu">
+            <ul nz-menu>
+              <li nz-menu-item (click)="logOutUser()">
+                {{ this.getTranslation('common.logOut') }}
+              </li>
+            </ul>
+          </nz-dropdown-menu>
+        </ng-template>
+
+        <ng-template #loggedOut>
+          <button nz-button (click)="logInUser()">
+            {{ this.getTranslation('common.logIn') }}
+          </button>
+        </ng-template>
       </div>
     </nz-header>
     <nz-content>

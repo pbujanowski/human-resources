@@ -48,6 +48,8 @@
     "yes": "Tak",
     "no": "Nie",
     "confirmation": "Potwierdzenie",
-    "error": "Błąd"
+    "error": "Błąd",
+    "logIn": "Zaloguj się",
+    "logOut": "Wyloguj się"
   }
 }
