@@ -41,15 +41,28 @@
       "confirmation": {
         "deleteEmployee": "Czy na pewno chcesz usunąć pracownika?"
       }
+    },
+    "profile": {
+      "profile": "Profil",
+      "sub": "ID",
+      "email_verified": "Email potwierdzony",
+      "name": "Imię i nazwisko",
+      "preferred_username": "Preferowana nazwa użytkownika",
+      "given_name": "Imię",
+      "family_name": "Nazwisko",
+      "email": "Email"
     }
+  },
+  "userMenu": {
+    "logIn": "Zaloguj się",
+    "logOut": "Wyloguj się",
+    "viewProfile": "Pokaż profil"
   },
   "common": {
     "submit": "Wyślij",
     "yes": "Tak",
     "no": "Nie",
     "confirmation": "Potwierdzenie",
-    "error": "Błąd",
-    "logIn": "Zaloguj się",
-    "logOut": "Wyloguj się"
+    "error": "Błąd"
   }
 }

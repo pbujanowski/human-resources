@@ -42,18 +42,21 @@
             [nzType]="isCollapsed ? 'double-right' : 'double-left'"></i>
         </span>
 
-        <ng-container *ngIf="user; then loggedIn; else loggedOut">
+        <ng-container *ngIf="profile; then loggedIn; else loggedOut">
         </ng-container>
 
         <ng-template #loggedIn>
           <button nz-button nz-dropdown [nzDropdownMenu]="menu">
             <i nz-icon nzType="user"></i>
-            <span>{{ user.email }}</span>
+            <span>{{ profile.email }}</span>
           </button>
           <nz-dropdown-menu #menu="nzDropdownMenu">
             <ul nz-menu>
+              <li nz-menu-item (click)="navigateToProfile()">
+                {{ this.getTranslation('userMenu.viewProfile') }}
+              </li>
               <li nz-menu-item (click)="logOutUser()">
-                {{ this.getTranslation('common.logOut') }}
+                {{ this.getTranslation('userMenu.logOut') }}
               </li>
             </ul>
           </nz-dropdown-menu>
@@ -61,7 +64,7 @@
 
         <ng-template #loggedOut>
           <button nz-button (click)="logInUser()">
-            {{ this.getTranslation('common.logIn') }}
+            {{ this.getTranslation('userMenu.logIn') }}
           </button>
         </ng-template>
       </div>

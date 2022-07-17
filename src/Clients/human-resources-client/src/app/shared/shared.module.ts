@@ -8,6 +8,7 @@ import { NZ_I18N } from 'ng-zorro-antd/i18n';
 import { en_US } from 'ng-zorro-antd/i18n';
 
 import { NzButtonModule } from 'ng-zorro-antd/button';
+import { NzCardModule } from 'ng-zorro-antd/card';
 import { NzDatePickerModule } from 'ng-zorro-antd/date-picker';
 import { NzDropDownModule } from 'ng-zorro-antd/dropdown';
 import { NzFormModule } from 'ng-zorro-antd/form';
@@ -52,6 +53,7 @@ const translateModuleConfig: TranslateModuleConfig = {
 
 const antDesignModules = [
   NzButtonModule,
+  NzCardModule,
   NzDatePickerModule,
   NzDropDownModule,
   NzFormModule,

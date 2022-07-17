@@ -1,6 +1,8 @@
 import { Component, Input } from '@angular/core';
+import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { OidcSecurityService } from 'angular-auth-oidc-client';
+import { Profile } from 'src/app/shared';
 
 @Component({
   selector: 'app-layout',
@@ -11,8 +13,8 @@ export class LayoutComponent {
   @Input()
   public title?: string;
 
-  public get user() {
-    return this.oidc.getUserData();
+  public get profile(): Profile {
+    return this.oidc.getUserData() as Profile;
   }
 
   public isCollapsed = false;
@@ -54,8 +56,11 @@ export class LayoutComponent {
 
   public logOutUser = () => this.oidc.logoff();
 
+  public navigateToProfile = () => this.router.navigate(['profile']);
+
   constructor(
     public translate: TranslateService,
-    private oidc: OidcSecurityService
+    private oidc: OidcSecurityService,
+    private router: Router
   ) {}
 }

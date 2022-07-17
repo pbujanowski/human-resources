@@ -1,0 +1,18 @@
+<nz-card [nzTitle]="getProfileLabel('profile')">
+  <nz-form-item>
+    <nz-form-label [nzLg]="6" [nzSm]="8" [nzXs]="24">
+      {{ getProfileLabel('name') }}
+    </nz-form-label>
+    <nz-form-control [nzSm]="16" [nzXs]="24">
+      <input nz-input [value]="profile.name" readonly />
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-label [nzLg]="6" [nzSm]="8" [nzXs]="24">
+      {{ getProfileLabel('email') }}
+    </nz-form-label>
+    <nz-form-control [nzSm]="16" [nzXs]="24">
+      <input nz-input [value]="profile.email" readonly />
+    </nz-form-control>
+  </nz-form-item>
+</nz-card>
