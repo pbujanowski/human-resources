@@ -1,4 +1,7 @@
 import { QueryHandler, IQueryHandler } from '@nestjs/cqrs';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
+import { Employee } from '../employee.entity';
 import { GetAllEmployeesQuery } from './get-all-employees.query';
 import { GetAllEmployeesResponse } from './get-all-employees.response';
 
@@ -6,22 +9,13 @@ import { GetAllEmployeesResponse } from './get-all-employees.response';
 export class GetAllEmployeesHandler
   implements IQueryHandler<GetAllEmployeesQuery, GetAllEmployeesResponse>
 {
-  async execute() {
-    return new GetAllEmployeesResponse([
-      {
-        id: '1',
-        firstName: 'Alice',
-        lastName: 'Smith',
-        birthdate: '1990-01-01',
-        personalIdNumber: '12345678910',
-      },
-      {
-        id: '2',
-        firstName: 'Bob',
-        lastName: 'Smith',
-        birthdate: '1992-01-01',
-        personalIdNumber: '10987654321',
-      },
-    ]);
+  constructor(
+    @InjectRepository(Employee)
+    private readonly employeesRepository: Repository<Employee>,
+  ) {}
+
+  async execute(): Promise<GetAllEmployeesResponse> {
+    const employees = await this.employeesRepository.find();
+    return { employees };
   }
 }
