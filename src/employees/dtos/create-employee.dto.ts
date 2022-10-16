@@ -1,4 +1,4 @@
-export interface CreateEmployeeDto {
+export class CreateEmployeeDto {
   firstName?: string;
   lastName?: string;
   personalIdNumber?: string;

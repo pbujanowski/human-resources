@@ -1,5 +1,5 @@
 import { EmployeeDto } from '../dtos';
 
-export interface DeleteEmployeeResponse {
-  readonly employee: EmployeeDto | null;
+export class DeleteEmployeeResponse {
+  constructor(public readonly employee: EmployeeDto | null) {}
 }
