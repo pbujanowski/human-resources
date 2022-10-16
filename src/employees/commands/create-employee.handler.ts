@@ -19,9 +19,7 @@ export class CreateEmployeeHandler
   async execute(
     command: CreateEmployeeCommand,
   ): Promise<CreateEmployeeResponse> {
-    const employee = await this.employeesRepository.save(
-      command.createEmployeeDto,
-    );
+    const employee = await this.employeesRepository.save(command.employee);
 
     this.eventBus.publish(new EmployeeCreatedEvent(employee));
 

@@ -2,16 +2,32 @@ import { Module } from '@nestjs/common';
 import { CqrsModule } from '@nestjs/cqrs';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { LoggerModule } from '../logger';
-import { CreateEmployeeHandler } from './commands';
+import {
+  CreateEmployeeHandler,
+  DeleteEmployeeHandler,
+  UpdateEmployeeHandler,
+} from './commands';
 import { Employee } from './employee.entity';
 import { EmployeesController } from './employees.controller';
 import { EmployeesService } from './employees.service';
-import { EmployeeCreatedHandler } from './events';
-import { GetAllEmployeesHandler } from './queries';
+import {
+  EmployeeCreatedHandler,
+  EmployeeDeletedHandler,
+  EmployeeUpdatedHandler,
+} from './events';
+import { GetAllEmployeesHandler, GetEmployeeByIdHandler } from './queries';
 
-const CommandHandlers = [CreateEmployeeHandler];
-const EventHandlers = [EmployeeCreatedHandler];
-const QueryHandlers = [GetAllEmployeesHandler];
+const CommandHandlers = [
+  CreateEmployeeHandler,
+  DeleteEmployeeHandler,
+  UpdateEmployeeHandler,
+];
+const EventHandlers = [
+  EmployeeCreatedHandler,
+  EmployeeDeletedHandler,
+  EmployeeUpdatedHandler,
+];
+const QueryHandlers = [GetAllEmployeesHandler, GetEmployeeByIdHandler];
 
 @Module({
   imports: [CqrsModule, LoggerModule, TypeOrmModule.forFeature([Employee])],

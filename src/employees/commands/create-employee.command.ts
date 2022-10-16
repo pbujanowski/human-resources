@@ -1,5 +1,5 @@
 import { CreateEmployeeDto } from '../dtos';
 
 export class CreateEmployeeCommand {
-  constructor(public readonly createEmployeeDto: CreateEmployeeDto) {}
+  constructor(public readonly employee: CreateEmployeeDto) {}
 }

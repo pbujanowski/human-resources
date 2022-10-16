@@ -1,8 +1,20 @@
 import { Injectable } from '@nestjs/common';
 import { CommandBus, QueryBus } from '@nestjs/cqrs';
-import { CreateEmployeeCommand, CreateEmployeeResponse } from './commands';
-import { CreateEmployeeDto } from './dtos';
-import { GetAllEmployeesQuery, GetAllEmployeesResponse } from './queries';
+import {
+  CreateEmployeeCommand,
+  CreateEmployeeResponse,
+  DeleteEmployeeCommand,
+  DeleteEmployeeResponse,
+  UpdateEmployeeCommand,
+  UpdateEmployeeResponse,
+} from './commands';
+import { CreateEmployeeDto, UpdateEmployeeDto } from './dtos';
+import {
+  GetAllEmployeesQuery,
+  GetAllEmployeesResponse,
+  GetEmployeeByIdQuery,
+  GetEmployeeByIdResponse,
+} from './queries';
 
 @Injectable()
 export class EmployeesService {
@@ -19,5 +31,19 @@ export class EmployeesService {
 
   async getAllEmployees(): Promise<GetAllEmployeesResponse> {
     return this.queryBus.execute(new GetAllEmployeesQuery());
+  }
+
+  async getEmployeeById(employeeId: string): Promise<GetEmployeeByIdResponse> {
+    return this.queryBus.execute(new GetEmployeeByIdQuery(employeeId));
+  }
+
+  async updateEmployee(
+    employee: UpdateEmployeeDto,
+  ): Promise<UpdateEmployeeResponse> {
+    return this.commandBus.execute(new UpdateEmployeeCommand(employee));
+  }
+
+  async deleteEmployee(employeeId: string): Promise<DeleteEmployeeResponse> {
+    return this.commandBus.execute(new DeleteEmployeeCommand(employeeId));
   }
 }
