@@ -1,3 +1,3 @@
 import { EmployeeDto } from './employee.dto';
 
-export type UpdateEmployeeDto = EmployeeDto;
+export class UpdateEmployeeDto extends EmployeeDto {}
