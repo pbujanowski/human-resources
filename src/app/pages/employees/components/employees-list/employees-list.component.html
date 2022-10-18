@@ -1,0 +1,77 @@
+<nz-table #employeesTable [nzData]="employees" [nzLoading]="isLoading">
+  <thead>
+    <tr>
+      <th translate="models.employee.firstName"></th>
+      <th translate="models.employee.lastName"></th>
+      <th translate="models.employee.personalIdNumber"></th>
+      <th translate="models.employee.birthdate"></th>
+      <th>
+        <nz-button-group>
+          <button nz-button nzShape="circle" (click)="onRefreshListClick()">
+            <i nz-icon nzType="reload"></i>
+          </button>
+          <button nz-button nzShape="circle" (click)="onCreateEmployeeClick()">
+            <i nz-icon nzType="plus"></i>
+          </button>
+        </nz-button-group>
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let employee of employeesTable.data">
+      <td>{{ employee.firstName }}</td>
+      <td>{{ employee.lastName }}</td>
+      <td>{{ employee.personalIdNumber }}</td>
+      <td>{{ employee.birthdate | date }}</td>
+      <td>
+        <nz-button-group>
+          <button
+            nz-button
+            nzShape="circle"
+            (click)="onUpdateEmployeeClick(employee)">
+            <i nz-icon nzType="form"></i>
+          </button>
+          <button
+            nz-button
+            nz-popconfirm
+            [nzPopconfirmTitle]="
+              getTranslate('models.employee.confirmation.deleteEmployee')
+            "
+            [nzOkText]="getTranslate('common.yes')"
+            [nzCancelText]="getTranslate('common.no')"
+            nzOkType="danger"
+            nzPopconfirmPlacement="bottom"
+            nzShape="circle"
+            nzDanger
+            (nzOnConfirm)="onDeleteEmployeeClick(employee.id)">
+            <i nz-icon nzType="delete"></i>
+          </button>
+        </nz-button-group>
+      </td>
+    </tr>
+  </tbody>
+</nz-table>
+
+<nz-modal
+  [(nzVisible)]="isEmployeeCreateModalVisible"
+  [nzTitle]="this.getTranslate('models.employee.message.createEmployee')"
+  [nzFooter]="[]"
+  [nzWidth]="768"
+  (nzOnCancel)="onEmployeeCreateModalClose()">
+  <ng-container *nzModalContent>
+    <app-employee-create (created)="onEmployeeCreated()"></app-employee-create>
+  </ng-container>
+</nz-modal>
+
+<nz-modal
+  [(nzVisible)]="isEmployeeUpdateModalVisible"
+  [nzTitle]="this.getTranslate('models.employee.message.updateEmployee')"
+  [nzFooter]="[]"
+  [nzWidth]="768"
+  (nzOnCancel)="onEmployeeUpdateModalClose()">
+  <ng-container *nzModalContent>
+    <app-employee-update
+      [employeeId]="selectedEmployee?.id"
+      (updated)="onEmployeeUpdated()"></app-employee-update>
+  </ng-container>
+</nz-modal>

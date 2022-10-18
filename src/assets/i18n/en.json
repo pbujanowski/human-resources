@@ -1,0 +1,53 @@
+{
+  "brand": "Human Resources",
+  "pages": {
+    "home": "Home",
+    "dashboard": "Dashboard",
+    "employees": "Employees",
+    "employeesList": "List"
+  },
+  "models": {
+    "employee": {
+      "firstName": "First name",
+      "lastName": "Last name",
+      "personalIdNumber": "Personal ID number",
+      "birthdate": "Birthdate",
+      "validation": {
+        "firstName": {
+          "required": "First name is required."
+        },
+        "lastName": {
+          "required": "Last name is required."
+        },
+        "personalIdNumber": {
+          "required": "Personal ID number is required."
+        },
+        "birthdate": {
+          "required": "Birthdate is required."
+        }
+      },
+      "message": {
+        "createEmployee": "Add employee",
+        "updateEmployee": "Update employee",
+        "employeeCreated": "Employee added.",
+        "employeeUpdated": "Employee updated."
+      },
+      "error": {
+        "failedToLoadListOfEmployees": "Failed to load list of employees.",
+        "failedToCreateEmployee": "Failed to add employee.",
+        "failedToUpdateEmployee": "Failed to update employee.",
+        "failedToDeleteEmployee": "Failed to remove employee."
+      },
+      "confirmation": {
+        "deleteEmployee": "Are you sure you want to delete employee?"
+      }
+    }
+  },
+  "common": {
+    "submit": "Submit",
+    "yes": "Yes",
+    "no": "No",
+    "confirmation": "Confirmation",
+    "error": "Error"
+  }
+}
