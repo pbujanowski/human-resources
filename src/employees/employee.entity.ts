@@ -11,9 +11,9 @@ export class Employee {
   @Column('nvarchar')
   lastName: string;
 
-  @Column('date')
-  birthdate: string;
-
   @Column('nvarchar')
   personalIdNumber: string;
+
+  @Column('date')
+  birthdate: string;
 }

@@ -5,7 +5,11 @@
   "author": {
     "name": "Patryk Bujanowski",
     "email": "bujanowski.patryk@outlook.com",
-    "url": "https://github.com/pbujanowski/human-resources-client"
+    "url": "https://github.com/pbujanowski"
+  },
+  "repository": {
+    "url": "https://github.com/pbujanowski/human-resources-api",
+    "type": "git"
   },
   "private": true,
   "license": "MIT",
