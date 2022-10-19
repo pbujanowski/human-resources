@@ -8,6 +8,7 @@
   },
   "models": {
     "employee": {
+      "id": "ID",
       "firstName": "First name",
       "lastName": "Last name",
       "personalIdNumber": "Personal ID number",
@@ -29,8 +30,10 @@
       "message": {
         "createEmployee": "Add employee",
         "updateEmployee": "Update employee",
+        "deleteEmployee": "Delete employee",
         "employeeCreated": "Employee added.",
-        "employeeUpdated": "Employee updated."
+        "employeeUpdated": "Employee updated.",
+        "employeeDeleted": "Employee deleted."
       },
       "error": {
         "failedToLoadListOfEmployees": "Failed to load list of employees.",
@@ -45,8 +48,10 @@
   },
   "common": {
     "submit": "Submit",
+    "cancel": "Cancel",
     "yes": "Yes",
     "no": "No",
+    "ok": "OK",
     "confirmation": "Confirmation",
     "error": "Error"
   }

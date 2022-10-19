@@ -6,8 +6,13 @@ import { SharedModule } from 'src/app/shared';
 import { EmployeesListComponent } from './components';
 import { EmployeeCreateComponent } from './components/employee-create/employee-create.component';
 import { EmployeeUpdateComponent } from './components/employee-update/employee-update.component';
+import { EmployeeModule } from 'src/app/employee';
 
-const routes: Routes = [{ path: 'list', component: EmployeesListComponent }];
+const routes: Routes = [
+  { path: 'list', component: EmployeesListComponent },
+  { path: 'create', component: EmployeeCreateComponent },
+  { path: 'update/:employeeId', component: EmployeeUpdateComponent },
+];
 
 @NgModule({
   declarations: [
@@ -15,7 +20,12 @@ const routes: Routes = [{ path: 'list', component: EmployeesListComponent }];
     EmployeeCreateComponent,
     EmployeeUpdateComponent,
   ],
-  imports: [CommonModule, RouterModule.forChild(routes), SharedModule],
+  imports: [
+    CommonModule,
+    EmployeeModule,
+    RouterModule.forChild(routes),
+    SharedModule,
+  ],
   exports: [RouterModule],
 })
 export class EmployeesModule {}

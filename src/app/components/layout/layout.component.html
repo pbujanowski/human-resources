@@ -1,52 +1,41 @@
-<nz-layout class="app-layout">
-  <nz-sider
-    class="menu-sidebar"
-    nzCollapsible
-    nzWidth="256px"
-    nzBreakpoint="md"
-    [(nzCollapsed)]="isCollapsed"
-    [nzTrigger]="null">
-    <div class="sidebar-logo">
-      <a routerLink="/">
-        <img src="assets/images/logo.png" alt="logo" />
-        <h1>{{ title }}</h1>
+<mat-toolbar color="primary" fxLayout="row">
+  <span>Human Resources</span>
+  <div fxFlex fxLayout="row" fxLayoutAlign="flex-start" fxHide.lt-sm>
+    <ul fxLayout fxLayoutGap="20px">
+      <a mat-button [matMenuTriggerFor]="homeMenu">
+        {{ getRouteLabel('home') }}
       </a>
-    </div>
-    <ul
-      nz-menu
-      nzTheme="dark"
-      nzMode="inline"
-      [nzInlineCollapsed]="isCollapsed"
-      *ngFor="let route of routes">
-      <ul
-        nz-submenu
-        [nzTitle]="getRouteLabel(route.key)"
-        [nzIcon]="route.icon"
-        nzOpen>
-        <li nz-menu-item nzMatchRouter *ngFor="let child of route.children">
-          <a [routerLink]="child.path">
-            <i nz-icon [nzType]="child.icon"></i>
-            <span>{{ getRouteLabel(child.key) }}</span>
-          </a>
-        </li>
-      </ul>
+      <a mat-button [matMenuTriggerFor]="employeesMenu">
+        {{ getRouteLabel('employees') }}
+      </a>
     </ul>
-  </nz-sider>
-  <nz-layout>
-    <nz-header>
-      <div class="app-header">
-        <span class="header-trigger" (click)="isCollapsed = !isCollapsed">
-          <i
-            class="trigger"
-            nz-icon
-            [nzType]="isCollapsed ? 'double-right' : 'double-left'"></i>
-        </span>
-      </div>
-    </nz-header>
-    <nz-content>
-      <div class="inner-content">
-        <ng-content></ng-content>
-      </div>
-    </nz-content>
-  </nz-layout>
-</nz-layout>
+  </div>
+  <div fxFlex fxLayout="row" fxLayoutAlign="flex-end" fxHide.gt-xs>
+    <button
+      mat-icon-button
+      [matMenuTriggerFor]="menu"
+      aria-label="additional links">
+      <mat-icon>menu</mat-icon>
+    </button>
+    <mat-menu #menu="matMenu">
+      <button mat-menu-item [matMenuTriggerFor]="homeMenu">
+        {{ getRouteLabel('home') }}
+      </button>
+      <button mat-menu-item [matMenuTriggerFor]="employeesMenu">
+        {{ getRouteLabel('employees') }}
+      </button>
+    </mat-menu>
+  </div>
+</mat-toolbar>
+<router-outlet></router-outlet>
+
+<mat-menu #homeMenu="matMenu">
+  <button mat-menu-item routerLink="/dashboard">
+    {{ getRouteLabel('dashboard') }}
+  </button>
+</mat-menu>
+<mat-menu #employeesMenu="matMenu">
+  <button mat-menu-item routerLink="/employees/list">
+    {{ getRouteLabel('employeesList') }}
+  </button>
+</mat-menu>

@@ -1,6 +1,11 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatTableDataSource } from '@angular/material/table';
+import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
-import { NzMessageService } from 'ng-zorro-antd/message';
+import { ConfirmDialogComponent } from 'src/app/components';
+import { ConfirmDialogModel } from 'src/app/models';
 import { Employee, EmployeeService } from 'src/app/shared';
 
 @Component({
@@ -9,13 +14,15 @@ import { Employee, EmployeeService } from 'src/app/shared';
   styleUrls: ['./employees-list.component.css'],
 })
 export class EmployeesListComponent implements OnInit {
-  public employees: Employee[] = [];
+  public dataSource = new MatTableDataSource<Employee>();
 
-  public selectedEmployee?: Employee;
-
-  public isEmployeeCreateModalVisible = false;
-
-  public isEmployeeUpdateModalVisible = false;
+  public readonly displayedColumns = [
+    'firstName',
+    'lastName',
+    'personalIdNumber',
+    'birthdate',
+    'actions',
+  ];
 
   public isLoading = false;
 
@@ -23,9 +30,9 @@ export class EmployeesListComponent implements OnInit {
     try {
       this.isLoading = true;
       this.employeeService.getEmployees().subscribe({
-        next: (res: Employee[]) => (this.employees = [...res]),
+        next: (res: Employee[]) => (this.dataSource.data = [...res]),
         error: () =>
-          this.showError(
+          this.showMessage(
             this.getTranslate(
               'models.employee.error.failedToLoadListOfEmployees'
             )
@@ -38,9 +45,14 @@ export class EmployeesListComponent implements OnInit {
 
   public deleteEmployee = (id: string) => {
     this.employeeService.deleteEmployee(id).subscribe({
-      next: () => this.getEmployees(),
+      next: () => {
+        this.showMessage(
+          this.getTranslate('models.employee.message.employeeDeleted')
+        );
+        this.getEmployees();
+      },
       error: () =>
-        this.showError(
+        this.showMessage(
           this.getTranslate('models.employee.error.failedToDeleteEmployee')
         ),
     });
@@ -49,48 +61,49 @@ export class EmployeesListComponent implements OnInit {
   public onRefreshListClick = () => this.getEmployees();
 
   public onCreateEmployeeClick = () => {
-    this.isEmployeeCreateModalVisible = true;
+    this.router.navigate(['employees/create']);
   };
 
-  public onUpdateEmployeeClick = (employee?: Employee) => {
-    this.selectedEmployee = employee;
-    this.isEmployeeUpdateModalVisible = true;
+  public onUpdateEmployeeClick = (employeeId?: string) => {
+    this.router.navigate([`employees/update/${employeeId}`]);
   };
 
-  public onDeleteEmployeeClick = (id?: string) => {
-    if (id) {
-      this.deleteEmployee(id);
+  public onDeleteEmployeeClick = (employeeId?: string) => {
+    if (employeeId) {
+      const title = this.getTranslate('models.employee.message.deleteEmployee');
+      const message = this.getTranslate(
+        'models.employee.confirmation.deleteEmployee'
+      );
+      const dialogData = new ConfirmDialogModel(title, message);
+      const dialogRef = this.dialog.open(ConfirmDialogComponent, {
+        data: dialogData,
+      });
+
+      dialogRef.afterClosed().subscribe((res: Boolean) => {
+        if (res) {
+          this.deleteEmployee(employeeId);
+        }
+      });
     }
-  };
-
-  public onEmployeeCreated = () => {
-    this.isEmployeeCreateModalVisible = false;
-    this.getEmployees();
-  };
-
-  public onEmployeeUpdated = () => {
-    this.isEmployeeUpdateModalVisible = false;
-    this.getEmployees();
-  };
-
-  public onEmployeeCreateModalClose = () => {
-    this.isEmployeeCreateModalVisible = false;
-  };
-
-  public onEmployeeUpdateModalClose = () => {
-    this.isEmployeeUpdateModalVisible = false;
   };
 
   public getTranslate = (key: string) => this.translate.instant(key);
 
-  private showError = (message: string) => {
-    this.message.error(message);
+  public getModelTranslate = (property: string) =>
+    this.getTranslate(`models.employee.${property}`);
+
+  private showMessage = (message: string) => {
+    this.snackBar.open(message, this.getTranslate('common.ok'), {
+      duration: 3000,
+    });
   };
 
   constructor(
-    private employeeService: EmployeeService,
-    private message: NzMessageService,
-    private translate: TranslateService
+    private readonly employeeService: EmployeeService,
+    private readonly translate: TranslateService,
+    private readonly router: Router,
+    private readonly dialog: MatDialog,
+    private readonly snackBar: MatSnackBar
   ) {}
 
   ngOnInit(): void {

@@ -1,3 +1,3 @@
-export * from './models';
-export * from './services';
+export * from '../employee/models';
+export * from '../employee/services';
 export { SharedModule } from './shared.module';

@@ -1,8 +1,8 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { ActivatedRoute, Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
-import { en_US, NzI18nService, pl_PL } from 'ng-zorro-antd/i18n';
-import { NzMessageService } from 'ng-zorro-antd/message';
 import { Employee, EmployeeService } from 'src/app/shared';
 
 @Component({
@@ -11,21 +11,16 @@ import { Employee, EmployeeService } from 'src/app/shared';
   styleUrls: ['./employee-update.component.css'],
 })
 export class EmployeeUpdateComponent implements OnInit {
-  @Input()
-  public employeeId?: string;
-
-  @Output()
-  public updated = new EventEmitter();
-
-  @Output()
-  public failed = new EventEmitter();
-
   public employeeForm = new FormGroup({
     firstName: new FormControl('', [Validators.required]),
     lastName: new FormControl('', [Validators.required]),
     personalIdNumber: new FormControl('', [Validators.required]),
-    birthdate: new FormControl(new Date('1990-01-01'), [Validators.required]),
+    birthdate: new FormControl('1990-01-01', [Validators.required]),
   });
+
+  public get employeeId() {
+    return this.activatedRoute.snapshot.paramMap.get('employeeId') || undefined;
+  }
 
   public get firstName() {
     return this.employeeForm.get('firstName');
@@ -42,6 +37,10 @@ export class EmployeeUpdateComponent implements OnInit {
   public get birthdate() {
     return this.employeeForm.get('birthdate');
   }
+
+  public hasError = (controlName: string, errorName: string) => {
+    return this.employeeForm.controls[controlName].hasError(errorName);
+  };
 
   public getEmployeeLabel = (key: string) => {
     return this.getTranslate(`models.employee.${key}`);
@@ -63,16 +62,15 @@ export class EmployeeUpdateComponent implements OnInit {
       };
       this.employeeService.updateEmployee(employee).subscribe({
         next: () => {
-          this.showSuccess(
+          this.showMessage(
             this.getTranslate('models.employee.message.employeeUpdated')
           );
-          this.updated.emit();
+          this.router.navigate(['employees/list']);
         },
         error: () => {
-          this.showError(
+          this.showMessage(
             this.getTranslate('models.employee.error.failedToUpdateEmployee')
           );
-          this.failed.emit();
         },
       });
     } else {
@@ -85,47 +83,37 @@ export class EmployeeUpdateComponent implements OnInit {
     }
   };
 
-  private showSuccess = (message: string) => {
-    this.message.success(message);
-  };
+  public onFormCancel = () => this.router.navigate(['employees/list']);
 
-  private showError = (message: string) => {
-    this.message.error(message);
+  private showMessage = (message: string) => {
+    this.snackBar.open(message, this.getTranslate('common.ok'), {
+      duration: 3000,
+    });
   };
-
-  private getNzLocale = () => {
-    switch (this.translate.defaultLang) {
-      case 'en':
-        return en_US;
-      case 'pl':
-        return pl_PL;
-      default:
-        return en_US;
-    }
-  };
-
-  constructor(
-    private translate: TranslateService,
-    private i18n: NzI18nService,
-    private message: NzMessageService,
-    private employeeService: EmployeeService
-  ) {}
 
   private getEmployeeById = (employeeId: string) => {
     this.employeeService.getEmployeeById(employeeId).subscribe({
       next: res => {
+        console.log(`EMPLOYEE: ${JSON.stringify(res)}`);
         this.employeeForm.patchValue({
           firstName: res.firstName,
           lastName: res.lastName,
           personalIdNumber: res.personalIdNumber,
-          birthdate: new Date(res.birthdate || Date.now()),
+          birthdate: res.birthdate,
         });
       },
     });
   };
 
+  constructor(
+    private readonly translate: TranslateService,
+    private readonly employeeService: EmployeeService,
+    private readonly activatedRoute: ActivatedRoute,
+    private readonly router: Router,
+    private readonly snackBar: MatSnackBar
+  ) {}
+
   ngOnInit(): void {
-    this.i18n.setLocale(this.getNzLocale());
     if (this.employeeId) {
       this.getEmployeeById(this.employeeId);
     }

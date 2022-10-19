@@ -1,8 +1,8 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
-import { en_US, NzI18nService, pl_PL } from 'ng-zorro-antd/i18n';
-import { NzMessageService } from 'ng-zorro-antd/message';
 import { Employee, EmployeeService } from 'src/app/shared';
 
 @Component({
@@ -10,18 +10,12 @@ import { Employee, EmployeeService } from 'src/app/shared';
   templateUrl: './employee-create.component.html',
   styleUrls: ['./employee-create.component.css'],
 })
-export class EmployeeCreateComponent implements OnInit {
-  @Output()
-  public created = new EventEmitter();
-
-  @Output()
-  public failed = new EventEmitter();
-
+export class EmployeeCreateComponent {
   public employeeForm = new FormGroup({
     firstName: new FormControl('', [Validators.required]),
     lastName: new FormControl('', [Validators.required]),
     personalIdNumber: new FormControl('', [Validators.required]),
-    birthdate: new FormControl(new Date('1990-01-01'), [Validators.required]),
+    birthdate: new FormControl('1990-01-01', [Validators.required]),
   });
 
   public get firstName() {
@@ -39,6 +33,10 @@ export class EmployeeCreateComponent implements OnInit {
   public get birthdate() {
     return this.employeeForm.get('birthdate');
   }
+
+  public hasError = (controlName: string, errorName: string) => {
+    return this.employeeForm.controls[controlName].hasError(errorName);
+  };
 
   public getEmployeeLabel = (key: string) => {
     return this.getTranslate(`models.employee.${key}`);
@@ -59,16 +57,15 @@ export class EmployeeCreateComponent implements OnInit {
       };
       this.employeeService.createEmployee(employee).subscribe({
         next: () => {
-          this.showSuccess(
+          this.showMessage(
             this.getTranslate('models.employee.message.employeeCreated')
           );
-          this.created.emit();
+          this.router.navigate(['employees/list']);
         },
         error: () => {
-          this.showError(
+          this.showMessage(
             this.getTranslate('models.employee.error.failedToCreateEmployee')
           );
-          this.failed.emit();
         },
       });
     } else {
@@ -81,33 +78,18 @@ export class EmployeeCreateComponent implements OnInit {
     }
   };
 
-  private showSuccess = (message: string) => {
-    this.message.success(message);
-  };
+  public onFormCancel = () => this.router.navigate(['employees/list']);
 
-  private showError = (message: string) => {
-    this.message.error(message);
-  };
-
-  private getNzLocale = () => {
-    switch (this.translate.defaultLang) {
-      case 'en':
-        return en_US;
-      case 'pl':
-        return pl_PL;
-      default:
-        return en_US;
-    }
+  private showMessage = (message: string) => {
+    this.snackBar.open(message, this.getTranslate('common.ok'), {
+      duration: 3000,
+    });
   };
 
   constructor(
-    private translate: TranslateService,
-    private i18n: NzI18nService,
-    private message: NzMessageService,
-    private employeeService: EmployeeService
+    private readonly translate: TranslateService,
+    private readonly employeeService: EmployeeService,
+    private readonly router: Router,
+    private readonly snackBar: MatSnackBar
   ) {}
-
-  ngOnInit(): void {
-    this.i18n.setLocale(this.getNzLocale());
-  }
 }

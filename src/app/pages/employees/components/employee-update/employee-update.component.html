@@ -1,105 +1,75 @@
-<form nz-form [formGroup]="employeeForm" (ngSubmit)="onFormSubmit()">
-  <nz-form-item>
-    <nz-form-label
-      [nzLg]="6"
-      [nzSm]="8"
-      [nzXs]="24"
-      nzRequired
-      nzFor="firstName">
-      {{ getEmployeeLabel('firstName') }}
-    </nz-form-label>
-    <nz-form-control
-      [nzSm]="16"
-      [nzXs]="24"
-      nzHasFeedback
-      [nzErrorTip]="firstNameError">
-      <input nz-input formControlName="firstName" id="firstName" />
-    </nz-form-control>
-    <ng-template #firstNameError let-control>
-      <ng-container *ngIf="control.hasError('required')">
-        {{ getValidation('firstName.required') }}
-      </ng-container>
-    </ng-template>
-  </nz-form-item>
-  <nz-form-item>
-    <nz-form-label
-      [nzLg]="6"
-      [nzSm]="8"
-      [nzXs]="24"
-      nzRequired
-      nzFor="lastName">
-      {{ getEmployeeLabel('lastName') }}
-    </nz-form-label>
-    <nz-form-control
-      [nzSm]="16"
-      [nzXs]="24"
-      nzHasFeedback
-      [nzErrorTip]="lastNameError">
-      <input nz-input formControlName="lastName" id="lastName" />
-    </nz-form-control>
-    <ng-template #lastNameError let-control>
-      <ng-container *ngIf="control.hasError('required')">
-        {{ getValidation('lastName.required') }}
-      </ng-container>
-    </ng-template>
-  </nz-form-item>
-  <nz-form-item>
-    <nz-form-label
-      [nzLg]="6"
-      [nzSm]="8"
-      [nzXs]="24"
-      nzRequired
-      nzFor="personalIdNumber">
-      {{ getEmployeeLabel('personalIdNumber') }}
-    </nz-form-label>
-    <nz-form-control
-      [nzSm]="16"
-      [nzXs]="24"
-      nzHasFeedback
-      [nzErrorTip]="personalIdNumberError">
-      <input
-        nz-input
-        formControlName="personalIdNumber"
-        id="personalIdNumber" />
-    </nz-form-control>
-    <ng-template #personalIdNumberError let-control>
-      <ng-container *ngIf="control.hasError('required')">
-        {{ getValidation('personalIdNumber.required') }}
-      </ng-container>
-    </ng-template>
-  </nz-form-item>
-  <nz-form-item>
-    <nz-form-label
-      [nzLg]="6"
-      [nzSm]="8"
-      [nzXs]="24"
-      nzRequired
-      nzFor="birthdate">
-      {{ getEmployeeLabel('birthdate') }}
-    </nz-form-label>
-    <nz-form-control
-      [nzSm]="16"
-      [nzXs]="24"
-      nzHasFeedback
-      [nzErrorTip]="birthdateError">
-      <nz-date-picker
-        formControlName="birthdate"
-        id="birthdate"></nz-date-picker>
-    </nz-form-control>
-    <ng-template #birthdateError let-control>
-      <ng-container *ngIf="control.hasError('required')">
-        {{ getValidation('birthdate.required') }}
-      </ng-container>
-    </ng-template>
-  </nz-form-item>
-  <nz-form-item>
-    <nz-form-control
-      [nzLg]="{ span: 8, offset: 6 }"
-      [nzSm]="{ span: 16, offset: 8 }"
-      [nzXs]="{ span: 24, offset: 0 }">
-      <button nz-button nzType="primary">
+<mat-card>
+  <mat-card-title>
+    {{ getTranslate('models.employee.message.updateEmployee') }}
+  </mat-card-title>
+  <form
+    [formGroup]="employeeForm"
+    (ngSubmit)="(onFormSubmit)"
+    fxLayout="column wrap"
+    fxLayoutAlign="center center"
+    fxLayoutGap="10px">
+    <mat-card-content>
+      <mat-form-field>
+        <input
+          matInput
+          type="text"
+          [placeholder]="getEmployeeLabel('firstName')"
+          formControlName="firstName"
+          id="firstName" />
+        <mat-error *ngIf="hasError('firstName', 'required')">
+          {{ getValidation('firstName.required') }}
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <input
+          matInput
+          type="text"
+          [placeholder]="getEmployeeLabel('lastName')"
+          formControlName="lastName"
+          id="lastName" />
+        <mat-error *ngIf="hasError('lastName', 'required')">
+          {{ getValidation('lastName.required') }}
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <input
+          matInput
+          type="text"
+          [placeholder]="getEmployeeLabel('personalIdNumber')"
+          formControlName="personalIdNumber"
+          id="personalIdNumber" />
+        <mat-error *ngIf="hasError('personalIdNumber', 'required')">
+          {{ getValidation('personalIdNumber.required') }}
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <input
+          matInput
+          type="date"
+          [placeholder]="getEmployeeLabel('birthdate')"
+          formControlName="birthdate"
+          id="birthdate" />
+        <mat-error *ngIf="hasError('birthdate', 'required')">
+          {{ getValidation('birthdate.required') }}
+        </mat-error>
+      </mat-form-field>
+    </mat-card-content>
+    <mat-card-actions>
+      <button
+        type="submit"
+        mat-raised-button
+        color="primary"
+        [disabled]="!employeeForm.valid"
+        (click)="onFormSubmit()">
         {{ getTranslate('common.submit') }}
       </button>
-    </nz-form-control>
-  </nz-form-item>
-</form>
+      <button
+        type="button"
+        mat-raised-button
+        color="danger"
+        (click)="onFormCancel()">
+        {{ getTranslate('common.cancel') }}
+      </button>
+    </mat-card-actions>
+  </form>
+</mat-card>

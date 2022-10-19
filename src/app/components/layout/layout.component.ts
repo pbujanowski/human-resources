@@ -10,8 +10,6 @@ export class LayoutComponent {
   @Input()
   public title?: string;
 
-  public isCollapsed = false;
-
   public routes = [
     {
       key: 'home',

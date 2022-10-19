@@ -3,31 +3,18 @@ import { CommonModule, registerLocaleData } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
 import en from '@angular/common/locales/en';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { FlexLayoutModule } from '@angular/flex-layout';
 
-import { NZ_I18N } from 'ng-zorro-antd/i18n';
-import { en_US } from 'ng-zorro-antd/i18n';
-
-import { NzButtonModule } from 'ng-zorro-antd/button';
-import { NzCardModule } from 'ng-zorro-antd/card';
-import { NzDatePickerModule } from 'ng-zorro-antd/date-picker';
-import { NzDropDownModule } from 'ng-zorro-antd/dropdown';
-import { NzFormModule } from 'ng-zorro-antd/form';
-import { NzInputModule } from 'ng-zorro-antd/input';
-import { NzLayoutModule } from 'ng-zorro-antd/layout';
-import { NzMenuModule } from 'ng-zorro-antd/menu';
-import { NzMessageModule } from 'ng-zorro-antd/message';
-import { NzModalModule } from 'ng-zorro-antd/modal';
-import { NzPopconfirmModule } from 'ng-zorro-antd/popconfirm';
-import { NzTableModule } from 'ng-zorro-antd/table';
-import { NZ_ICONS, NzIconModule } from 'ng-zorro-antd/icon';
-import {
-  DashboardOutline,
-  DoubleLeftOutline,
-  DoubleRightOutline,
-  HomeOutline,
-  TeamOutline,
-  UnorderedListOutline,
-} from '@ant-design/icons-angular/icons';
+import { MatButtonModule } from '@angular/material/button';
+import { MatCardModule } from '@angular/material/card';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatIconModule } from '@angular/material/icon';
+import { MatInputModule } from '@angular/material/input';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatTableModule } from '@angular/material/table';
+import { MatToolbarModule } from '@angular/material/toolbar';
 
 import {
   TranslateLoader,
@@ -37,9 +24,20 @@ import {
 
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 
-import { EmployeeService } from './services';
-
 const HttpLoaderFactory = (http: HttpClient) => new TranslateHttpLoader(http);
+
+const materialModules = [
+  MatButtonModule,
+  MatCardModule,
+  MatDialogModule,
+  MatFormFieldModule,
+  MatIconModule,
+  MatInputModule,
+  MatMenuModule,
+  MatSnackBarModule,
+  MatTableModule,
+  MatToolbarModule,
+];
 
 const translateModuleConfig: TranslateModuleConfig = {
   loader: {
@@ -50,30 +48,6 @@ const translateModuleConfig: TranslateModuleConfig = {
   defaultLanguage: 'en',
 };
 
-const antDesignModules = [
-  NzButtonModule,
-  NzCardModule,
-  NzDatePickerModule,
-  NzDropDownModule,
-  NzFormModule,
-  NzIconModule,
-  NzInputModule,
-  NzLayoutModule,
-  NzMenuModule,
-  NzMessageModule,
-  NzModalModule,
-  NzPopconfirmModule,
-  NzTableModule,
-];
-const icons = [
-  DashboardOutline,
-  DoubleLeftOutline,
-  DoubleRightOutline,
-  HomeOutline,
-  TeamOutline,
-  UnorderedListOutline,
-];
-
 registerLocaleData(en);
 
 @NgModule({
@@ -82,19 +56,16 @@ registerLocaleData(en);
     CommonModule,
     ReactiveFormsModule,
     HttpClientModule,
-    antDesignModules,
     TranslateModule.forRoot(translateModuleConfig),
+    FlexLayoutModule,
+    materialModules,
   ],
   exports: [
-    antDesignModules,
     ReactiveFormsModule,
     HttpClientModule,
     TranslateModule,
-  ],
-  providers: [
-    { provide: NZ_I18N, useValue: en_US },
-    { provide: NZ_ICONS, useValue: icons },
-    EmployeeService,
+    FlexLayoutModule,
+    materialModules,
   ],
 })
 export class SharedModule {}

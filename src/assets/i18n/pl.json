@@ -8,6 +8,7 @@
   },
   "models": {
     "employee": {
+      "id": "ID",
       "firstName": "Imię",
       "lastName": "Nazwisko",
       "personalIdNumber": "Numer identyfikacyjny",
@@ -29,8 +30,10 @@
       "message": {
         "createEmployee": "Dodaj pracownika",
         "updateEmployee": "Edytuj pracownika",
+        "deleteEmployee": "Usuń pracownika",
         "employeeCreated": "Dodano pracownika",
-        "employeeUpdated": "Edytowano pracownika"
+        "employeeUpdated": "Edytowano pracownika",
+        "employeeDeleted": "Usunięto pracownika"
       },
       "error": {
         "failedToLoadListOfEmployees": "Nie udało się wczytać listy pracowników.",
@@ -45,8 +48,10 @@
   },
   "common": {
     "submit": "Wyślij",
+    "cancel": "Anuluj",
     "yes": "Tak",
     "no": "Nie",
+    "ok": "OK",
     "confirmation": "Potwierdzenie",
     "error": "Błąd"
   }
