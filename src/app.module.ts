@@ -1,19 +1,17 @@
 import { Module } from '@nestjs/common';
+import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { Employee, EmployeesModule } from './employees';
+import { typeOrmModuleOptions } from './configs';
+import { EmployeesModule } from './employees';
 import { LoggerModule } from './logger';
+
 @Module({
   imports: [
+    ConfigModule.forRoot(),
     EmployeesModule,
-    TypeOrmModule.forRoot({
-      type: 'sqlite',
-      database: 'human-resources.api.sqlite',
-      entities: [Employee],
-      // TODO
-      synchronize: true,
-    }),
+    TypeOrmModule.forRoot(typeOrmModuleOptions),
     LoggerModule,
   ],
   controllers: [AppController],
