@@ -1,17 +1,16 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
-import { TypeOrmModule } from '@nestjs/typeorm';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { typeOrmModuleOptions } from './configs';
+import { DatabaseModule } from './database';
 import { EmployeesModule } from './employees';
 import { LoggerModule } from './logger';
 
 @Module({
   imports: [
     ConfigModule.forRoot(),
+    DatabaseModule,
     EmployeesModule,
-    TypeOrmModule.forRoot(typeOrmModuleOptions),
     LoggerModule,
   ],
   controllers: [AppController],
