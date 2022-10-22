@@ -9,12 +9,12 @@ API_DB_DEST="human-resources-api-db"
 CLIENT_URL="https://github.com/pbujanowski/human-resources-client.git"
 CLIENT_DEST="human-resources-client"
 
-function fetch_repository () {
+function fetch_repository {
     if [[ -d $2 ]]
     then
-        (cd $2 && git pull $1)
+        (cd "$2" && git pull "$1")
     else
-        git clone $1 $2
+        git clone "$1" "$2"
     fi
 }
 
