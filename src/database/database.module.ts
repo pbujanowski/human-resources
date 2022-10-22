@@ -1,8 +1,6 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { Employee } from 'src/employees';
-import { CreateEmployeeTable1666188902624 } from 'src/migrations';
 
 @Module({
   imports: [
@@ -16,8 +14,8 @@ import { CreateEmployeeTable1666188902624 } from 'src/migrations';
         username: configService.get('DATABASE_USER_NAME'),
         password: configService.get('DATABASE_USER_PASSWORD'),
         database: configService.get('DATABASE_NAME'),
-        entities: [Employee],
-        migrations: [CreateEmployeeTable1666188902624],
+        entities: ['dist/**/entities/**/*{.ts,.js}'],
+        migrations: ['dist/migrations/**/*{.ts,.js}'],
         migrationsTableName: 'migrations',
         migrationsRun: true,
         synchronize: false,
