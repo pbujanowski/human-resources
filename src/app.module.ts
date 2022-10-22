@@ -11,9 +11,9 @@ import { AppEventModule } from './app-event';
   imports: [
     ConfigModule.forRoot(),
     DatabaseModule,
+    AppEventModule,
     EmployeeModule,
     LoggerModule,
-    AppEventModule,
   ],
   controllers: [AppController],
   providers: [AppService],

@@ -14,17 +14,17 @@ import { EmployeeService } from './employee.service';
 
 @Controller('employees')
 export class EmployeeController {
-  constructor(private readonly employeesService: EmployeeService) {}
+  constructor(private readonly employeeService: EmployeeService) {}
 
   @Get('get-all-employees')
   async getAllEmployees(@Res() res: Response) {
-    const queryResponse = await this.employeesService.getAllEmployees();
+    const queryResponse = await this.employeeService.getAllEmployees();
     return res.json(queryResponse.employees);
   }
 
   @Get('get-employee-by-id/:id')
   async getEmployeeById(@Param('id') employeeId: string, @Res() res: Response) {
-    const queryResponse = await this.employeesService.getEmployeeById(
+    const queryResponse = await this.employeeService.getEmployeeById(
       employeeId,
     );
     if (queryResponse.employee) {
@@ -38,9 +38,7 @@ export class EmployeeController {
     @Body() employee: CreateEmployeeDto,
     @Res() res: Response,
   ) {
-    const commandResponse = await this.employeesService.createEmployee(
-      employee,
-    );
+    const commandResponse = await this.employeeService.createEmployee(employee);
     return res.json(commandResponse.employee);
   }
 
@@ -53,9 +51,7 @@ export class EmployeeController {
     if (employeeId !== employee.id) {
       return res.sendStatus(400);
     }
-    const commandResponse = await this.employeesService.updateEmployee(
-      employee,
-    );
+    const commandResponse = await this.employeeService.updateEmployee(employee);
     if (commandResponse.employee) {
       return res.json(commandResponse.employee);
     }
@@ -64,7 +60,7 @@ export class EmployeeController {
 
   @Delete('delete-employee/:id')
   async deleteEmployee(@Param('id') employeeId: string, @Res() res: Response) {
-    const commandResponse = await this.employeesService.deleteEmployee(
+    const commandResponse = await this.employeeService.deleteEmployee(
       employeeId,
     );
     if (commandResponse.employee) {

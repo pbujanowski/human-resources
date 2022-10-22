@@ -11,6 +11,9 @@ export class AppEvent {
   @Column('text', { name: 'content' })
   content: string;
 
-  @Column('datetime', { name: 'occurence_date' })
+  @Column('datetime', {
+    name: 'occurence_date',
+    default: () => 'CURRENT_TIMESTAMP',
+  })
   occurrenceDate: string;
 }
