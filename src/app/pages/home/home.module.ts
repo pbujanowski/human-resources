@@ -3,6 +3,8 @@ import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
 
 import { DashboardComponent } from './components';
+import { SharedModule } from 'src/app/shared';
+import { AppEventModule } from 'src/app/app-event';
 
 const routes: Routes = [
   { path: '', redirectTo: 'dashboard' },
@@ -11,7 +13,12 @@ const routes: Routes = [
 
 @NgModule({
   declarations: [DashboardComponent],
-  imports: [CommonModule, RouterModule.forChild(routes)],
+  imports: [
+    CommonModule,
+    RouterModule.forChild(routes),
+    SharedModule,
+    AppEventModule,
+  ],
   exports: [RouterModule],
 })
 export class HomeModule {}

@@ -7,6 +7,15 @@
     "employeesList": "List"
   },
   "models": {
+    "appEvent": {
+      "id": "ID",
+      "name": "Name",
+      "content": "Content",
+      "occurrenceDate": "Occurence date",
+      "error": {
+        "failedToLoadListOfRecentAppEvents": "Failed to load list of recent app events."
+      }
+    },
     "employee": {
       "id": "ID",
       "firstName": "First name",
