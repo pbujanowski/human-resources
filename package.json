@@ -1,7 +1,7 @@
 {
   "name": "human-resources-client",
   "version": "1.0.0",
-  "description": "A client for Human Resources software.",
+  "description": "The Human Resources Client software.",
   "author": {
     "name": "Patryk Bujanowski",
     "email": "bujanowski.patryk@outlook.com",
