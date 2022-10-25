@@ -1,0 +1,9 @@
+[submodule "human-resources-api"]
+	path = human-resources-api
+	url = https://github.com/pbujanowski/human-resources-api.git
+[submodule "human-resources-api-db"]
+	path = human-resources-api-db
+	url = https://github.com/pbujanowski/human-resources-api-db.git
+[submodule "human-resources-client"]
+	path = human-resources-client
+	url = https://github.com/pbujanowski/human-resources-client.git
