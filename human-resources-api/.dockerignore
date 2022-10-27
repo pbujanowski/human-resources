@@ -1,0 +1,7 @@
+.dockerignore
+.env
+dist
+Dockerfile
+node_modules
+ormconfig.js
+yarn-error.log
