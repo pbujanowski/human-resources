@@ -1,2 +1,3 @@
-# human-resources-quickstart
-The Human Resources Quickstart software.
+# human-resources
+
+The Human Resources software.

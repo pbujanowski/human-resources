@@ -1,9 +1,0 @@
-[submodule "human-resources-api"]
-	path = human-resources-api
-	url = https://github.com/pbujanowski/human-resources-api.git
-[submodule "human-resources-client"]
-	path = human-resources-client
-	url = https://github.com/pbujanowski/human-resources-client.git
-[submodule "identity-management"]
-	path = identity-management
-	url = https://github.com/pbujanowski/identity-management.git
