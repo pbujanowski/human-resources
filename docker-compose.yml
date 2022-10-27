@@ -24,14 +24,9 @@ services:
       - api-db
 
   api-db:
-    build:
-      context: $API_DB_PATH
-      dockerfile: Dockerfile
-    image: human-resources-api-db
+    image: mysql:8.0.31-debian
     container_name: human-resources-api-db
     restart: unless-stopped
-    env_file:
-      - .env
     environment:
       - MYSQL_ROOT_PASSWORD=$API_DATABASE_USER_PASSWORD
       - MYSQL_DATABASE=$API_DATABASE_NAME
