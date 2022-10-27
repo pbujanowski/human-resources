@@ -1,0 +1,31 @@
+<mat-card>
+  <mat-card-title>{{ getTranslate('pages.dashboard') }}</mat-card-title>
+  <mat-card-content>
+    <table class="full-width" mat-table [dataSource]="dataSource">
+      <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef>
+          {{ getModelTranslate('name') }}
+        </th>
+        <td mat-cell *matCellDef="let appEvent">
+          {{ appEvent.name }}
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="occurrenceDate">
+        <th mat-header-cell *matHeaderCellDef>
+          {{ getModelTranslate('occurrenceDate') }}
+        </th>
+        <td mat-cell *matCellDef="let appEvent">
+          {{ appEvent.occurrenceDate | date: 'yyyy-MM-dd HH:mm' }}
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+    </table>
+  </mat-card-content>
+  <mat-card-actions>
+    <button mat-icon-button color="accent" (click)="onRefreshListClick()">
+      <mat-icon>refresh</mat-icon>
+    </button>
+  </mat-card-actions>
+</mat-card>

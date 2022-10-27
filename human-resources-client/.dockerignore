@@ -1,0 +1,7 @@
+.angular
+.dockerignore
+.env
+dist
+Dockerfile
+node_modules
+yarn-error.log

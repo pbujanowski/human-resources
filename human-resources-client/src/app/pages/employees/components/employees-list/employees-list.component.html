@@ -1,0 +1,68 @@
+<mat-card>
+  <mat-card-title>{{ getTranslate('pages.employees') }}</mat-card-title>
+  <mat-card-content>
+    <table class="full-width" mat-table [dataSource]="dataSource">
+      <ng-container matColumnDef="firstName">
+        <th mat-header-cell *matHeaderCellDef>
+          {{ getModelTranslate('firstName') }}
+        </th>
+        <td mat-cell *matCellDef="let employee">
+          {{ employee.firstName }}
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="lastName">
+        <th mat-header-cell *matHeaderCellDef>
+          {{ getModelTranslate('lastName') }}
+        </th>
+        <td mat-cell *matCellDef="let employee">
+          {{ employee.lastName }}
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="birthdate">
+        <th mat-header-cell *matHeaderCellDef>
+          {{ getModelTranslate('birthdate') }}
+        </th>
+        <td mat-cell *matCellDef="let employee">
+          {{ employee.birthdate | date: 'yyyy-MM-dd' }}
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="personalIdNumber">
+        <th mat-header-cell *matHeaderCellDef>
+          {{ getModelTranslate('personalIdNumber') }}
+        </th>
+        <td mat-cell *matCellDef="let employee">
+          {{ employee.personalIdNumber }}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="actions">
+        <th mat-header-cell *matHeaderCellDef></th>
+        <td mat-cell *matCellDef="let employee">
+          <button
+            mat-icon-button
+            color="accent"
+            (click)="onUpdateEmployeeClick(employee.id)">
+            <mat-icon>edit</mat-icon>
+          </button>
+          <button
+            mat-icon-button
+            color="accent"
+            (click)="onDeleteEmployeeClick(employee.id)">
+            <mat-icon>delete</mat-icon>
+          </button>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+    </table>
+  </mat-card-content>
+  <mat-card-actions>
+    <button mat-icon-button color="accent" (click)="onCreateEmployeeClick()">
+      <mat-icon>add</mat-icon>
+    </button>
+    <button mat-icon-button color="accent" (click)="onRefreshListClick()">
+      <mat-icon>refresh</mat-icon>
+    </button>
+  </mat-card-actions>
+</mat-card>

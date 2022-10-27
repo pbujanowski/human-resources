@@ -1,0 +1,67 @@
+{
+  "brand": "Human Resources",
+  "pages": {
+    "home": "Strona główna",
+    "dashboard": "Dashboard",
+    "employees": "Pracownicy",
+    "employeesList": "Lista"
+  },
+  "models": {
+    "appEvent": {
+      "id": "ID",
+      "name": "Nazwa",
+      "content": "Zawartość",
+      "occurrenceDate": "Data wystąpienia",
+      "error": {
+        "failedToLoadListOfRecentAppEvents": "Nie udało się wczytać listy ostatnich zdarzeń."
+      }
+    },
+    "employee": {
+      "id": "ID",
+      "firstName": "Imię",
+      "lastName": "Nazwisko",
+      "personalIdNumber": "Numer identyfikacyjny",
+      "birthdate": "Data urodzenia",
+      "validation": {
+        "firstName": {
+          "required": "Imię jest wymagane."
+        },
+        "lastName": {
+          "required": "Nazwisko jest wymagane."
+        },
+        "personalIdNumber": {
+          "required": "Numer identyfikacyjny jest wymagany."
+        },
+        "birthdate": {
+          "required": "Data urodzenia jest wymagana."
+        }
+      },
+      "message": {
+        "createEmployee": "Dodaj pracownika",
+        "updateEmployee": "Edytuj pracownika",
+        "deleteEmployee": "Usuń pracownika",
+        "employeeCreated": "Dodano pracownika",
+        "employeeUpdated": "Edytowano pracownika",
+        "employeeDeleted": "Usunięto pracownika"
+      },
+      "error": {
+        "failedToLoadListOfEmployees": "Nie udało się wczytać listy pracowników.",
+        "failedToCreateEmployee": "Nie udało się dodać pracownika.",
+        "failedToUpdateEmployee": "Nie udało się zaktualizować pracownika.",
+        "failedToDeleteEmployee": "Nie udało się usunąć pracownika."
+      },
+      "confirmation": {
+        "deleteEmployee": "Czy na pewno chcesz usunąć pracownika?"
+      }
+    }
+  },
+  "common": {
+    "submit": "Wyślij",
+    "cancel": "Anuluj",
+    "yes": "Tak",
+    "no": "Nie",
+    "ok": "OK",
+    "confirmation": "Potwierdzenie",
+    "error": "Błąd"
+  }
+}

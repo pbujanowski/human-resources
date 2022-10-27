@@ -1,0 +1,41 @@
+<mat-toolbar color="primary" fxLayout="row">
+  <span>Human Resources</span>
+  <div fxFlex fxLayout="row" fxLayoutAlign="flex-start" fxHide.lt-sm>
+    <ul fxLayout fxLayoutGap="20px">
+      <a mat-button [matMenuTriggerFor]="homeMenu">
+        {{ getRouteLabel('home') }}
+      </a>
+      <a mat-button [matMenuTriggerFor]="employeesMenu">
+        {{ getRouteLabel('employees') }}
+      </a>
+    </ul>
+  </div>
+  <div fxFlex fxLayout="row" fxLayoutAlign="flex-end" fxHide.gt-xs>
+    <button
+      mat-icon-button
+      [matMenuTriggerFor]="menu"
+      aria-label="additional links">
+      <mat-icon>menu</mat-icon>
+    </button>
+    <mat-menu #menu="matMenu">
+      <button mat-menu-item [matMenuTriggerFor]="homeMenu">
+        {{ getRouteLabel('home') }}
+      </button>
+      <button mat-menu-item [matMenuTriggerFor]="employeesMenu">
+        {{ getRouteLabel('employees') }}
+      </button>
+    </mat-menu>
+  </div>
+</mat-toolbar>
+<router-outlet></router-outlet>
+
+<mat-menu #homeMenu="matMenu">
+  <button mat-menu-item routerLink="/dashboard">
+    {{ getRouteLabel('dashboard') }}
+  </button>
+</mat-menu>
+<mat-menu #employeesMenu="matMenu">
+  <button mat-menu-item routerLink="/employees/list">
+    {{ getRouteLabel('employeesList') }}
+  </button>
+</mat-menu>
