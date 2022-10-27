@@ -11,29 +11,11 @@ services:
     env_file:
       - .env
     environment:
-      - API_PORT=$API_PORT
-      - DATABASE_HOST=$API_DATABASE_HOST
-      - DATABASE_PORT=$API_DATABASE_PORT
-      - DATABASE_USER_NAME=$API_DATABASE_USER_NAME
-      - DATABASE_USER_PASSWORD=$API_DATABASE_USER_PASSWORD
-      - DATABASE_NAME=$API_DATABASE_NAME
       - NODE_ENV=production
     ports:
       - $API_PORT:$API_PORT
     depends_on:
-      - api-db
-
-  api-db:
-    image: mysql:8.0.31-debian
-    container_name: human-resources-api-db
-    restart: unless-stopped
-    environment:
-      - MYSQL_ROOT_PASSWORD=$API_DATABASE_USER_PASSWORD
-      - MYSQL_DATABASE=$API_DATABASE_NAME
-    ports:
-      - $API_DATABASE_PORT:$API_DATABASE_PORT
-    volumes:
-      - human-resources-api-db:/var/lib/mysql
+      - db
 
   client:
     build:
@@ -48,11 +30,24 @@ services:
     env_file:
       - .env
     environment:
-      - API_URL=$API_URL
       - NODE_ENV=production
     ports:
       - $CLIENT_PORT:$CLIENT_PORT_EXPOSE
 
+  db:
+    image: mysql:8.0.31-debian
+    container_name: human-resources-db
+    restart: unless-stopped
+    env_file:
+      - .env
+    environment:
+      - MYSQL_ROOT_PASSWORD=$API_DATABASE_USER_PASSWORD
+      - MYSQL_DATABASE=$API_DATABASE_NAME
+    ports:
+      - $API_DATABASE_PORT:$API_DATABASE_PORT
+    volumes:
+      - human-resources-db:/var/lib/mysql
+
 volumes:
-  human-resources-api-db:
+  human-resources-db:
     driver: local
