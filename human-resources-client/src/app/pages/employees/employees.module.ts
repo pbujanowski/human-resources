@@ -3,9 +3,11 @@ import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
 
 import { SharedModule } from 'src/app/shared';
-import { EmployeesListComponent } from './components';
-import { EmployeeCreateComponent } from './components/employee-create/employee-create.component';
-import { EmployeeUpdateComponent } from './components/employee-update/employee-update.component';
+import {
+  EmployeeCreateComponent,
+  EmployeeUpdateComponent,
+  EmployeesListComponent,
+} from './components';
 import { EmployeeModule } from 'src/app/employee';
 
 const routes: Routes = [

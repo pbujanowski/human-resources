@@ -2,6 +2,8 @@
   "brand": "Human Resources",
   "pages": {
     "home": "Strona główna",
+    "login": "Zaloguj się",
+    "logout": "Wyloguj się",
     "dashboard": "Dashboard",
     "employees": "Pracownicy",
     "employeesList": "Lista"

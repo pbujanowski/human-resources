@@ -39,7 +39,10 @@ services:
       dockerfile: Dockerfile
       args:
         - API_URL=$API_URL
+        - CLIENT_AUTHORITY=$CLIENT_AUTHORITY
+        - CLIENT_ID=$CLIENT_ID
         - CLIENT_PORT_EXPOSE=$CLIENT_PORT_EXPOSE
+        - CLIENT_URL=$CLIENT_URL
     image: human-resources-client
     container_name: human-resources-client
     restart: unless-stopped

@@ -8,6 +8,22 @@
       <a mat-button [matMenuTriggerFor]="employeesMenu">
         {{ getRouteLabel('employees') }}
       </a>
+      <ng-container
+        *ngIf="isLoggedIn(); then loggedInAnchor; else loggedOutAnchor">
+      </ng-container>
+      <ng-template #loggedInAnchor>
+        <a mat-button>
+          {{ getUserClaims()?.email }}
+        </a>
+        <a mat-button (click)="onLogoutClick()">
+          {{ getRouteLabel('logout') }}
+        </a>
+      </ng-template>
+      <ng-template #loggedOutAnchor>
+        <a mat-button (click)="onLoginClick()">
+          {{ getRouteLabel('login') }}
+        </a>
+      </ng-template>
     </ul>
   </div>
   <div fxFlex fxLayout="row" fxLayoutAlign="flex-end" fxHide.gt-xs>
@@ -24,6 +40,25 @@
       <button mat-menu-item [matMenuTriggerFor]="employeesMenu">
         {{ getRouteLabel('employees') }}
       </button>
+      <ng-container
+        *ngIf="
+          isLoggedIn();
+          then loggedInButton;
+          else loggedOutButton
+        "></ng-container>
+      <ng-template #loggedInButton>
+        <button mat-menu-item>
+          {{ getUserClaims()?.email }}
+        </button>
+        <button mat-menu-item (click)="onLogoutClick()">
+          {{ getRouteLabel('logout') }}
+        </button>
+      </ng-template>
+      <ng-template #loggedOutButton>
+        <button mat-menu-item (click)="onLoginClick()">
+          {{ getRouteLabel('login') }}
+        </button>
+      </ng-template>
     </mat-menu>
   </div>
 </mat-toolbar>
