@@ -1,11 +1,24 @@
 import { NgModule } from '@angular/core';
+import { CommonModule, registerLocaleData } from '@angular/common';
+import {
+  HTTP_INTERCEPTORS,
+  HttpClient,
+  HttpClientModule,
+} from '@angular/common/http';
+import en from '@angular/common/locales/en';
+import { FlexLayoutModule } from '@angular/flex-layout';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { CommonModule } from '@angular/common';
-import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { ReactiveFormsModule } from '@angular/forms';
+
+import {
+  TranslateLoader,
+  TranslateModule,
+  TranslateModuleConfig,
+} from '@ngx-translate/core';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 
 import { AppRoutingModule } from './app-routing.module';
-import { SharedModule } from './shared';
 
 import { AppComponent } from './app.component';
 import { ConfirmDialogComponent, LayoutComponent } from './components';
@@ -13,8 +26,22 @@ import {
   AuthenticationInterceptor,
   AuthenticationModule,
 } from './authentication';
+import { MaterialModule } from './material';
 
 import { environment } from 'src/environments/environment';
+
+const HttpLoaderFactory = (http: HttpClient) => new TranslateHttpLoader(http);
+
+const translateModuleConfig: TranslateModuleConfig = {
+  loader: {
+    provide: TranslateLoader,
+    useFactory: HttpLoaderFactory,
+    deps: [HttpClient],
+  },
+  defaultLanguage: 'en',
+};
+
+registerLocaleData(en);
 
 @NgModule({
   declarations: [AppComponent, LayoutComponent, ConfirmDialogComponent],
@@ -22,8 +49,12 @@ import { environment } from 'src/environments/environment';
     BrowserModule,
     BrowserAnimationsModule,
     CommonModule,
+    ReactiveFormsModule,
+    HttpClientModule,
+    FlexLayoutModule,
     AppRoutingModule,
-    SharedModule,
+    MaterialModule,
+    TranslateModule.forRoot(translateModuleConfig),
     AuthenticationModule.forRoot({
       authority: environment.clientAuthority,
       clientId: environment.clientId,

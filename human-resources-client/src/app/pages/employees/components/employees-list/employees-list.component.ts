@@ -6,7 +6,7 @@ import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { ConfirmDialogComponent } from 'src/app/components';
 import { ConfirmDialogModel } from 'src/app/models';
-import { Employee, EmployeeService } from 'src/app/shared';
+import { Employee, EmployeeService } from 'src/app/employee';
 
 @Component({
   selector: 'app-employees-list',

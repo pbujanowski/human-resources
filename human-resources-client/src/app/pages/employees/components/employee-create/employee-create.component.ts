@@ -3,7 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
-import { Employee, EmployeeService } from 'src/app/shared';
+import { Employee, EmployeeService } from 'src/app/employee';
 
 @Component({
   selector: 'app-employee-create',

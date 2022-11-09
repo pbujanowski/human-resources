@@ -1,8 +1,9 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { ReactiveFormsModule } from '@angular/forms';
 import { RouterModule, Routes } from '@angular/router';
 
-import { SharedModule } from 'src/app/shared';
+import { MaterialModule } from 'src/app/material';
 import {
   EmployeeCreateComponent,
   EmployeeUpdateComponent,
@@ -26,7 +27,8 @@ const routes: Routes = [
     CommonModule,
     EmployeeModule,
     RouterModule.forChild(routes),
-    SharedModule,
+    ReactiveFormsModule,
+    MaterialModule,
   ],
   exports: [RouterModule],
 })
