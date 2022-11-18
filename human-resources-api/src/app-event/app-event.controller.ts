@@ -1,8 +1,10 @@
-import { Controller, Get, Res } from '@nestjs/common';
+import { Controller, Get, Res, UseGuards } from '@nestjs/common';
 import { Response } from 'express';
+import { AuthenticationGuard } from 'src/authentication';
 import { AppEventService } from './app-event.service';
 
 @Controller('app-events')
+@UseGuards(AuthenticationGuard)
 export class AppEventController {
   constructor(private readonly appEventService: AppEventService) {}
 

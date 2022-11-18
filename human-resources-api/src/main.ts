@@ -1,5 +1,6 @@
 import { NestFactory } from '@nestjs/core';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
+import helmet from 'helmet';
 import { AppModule } from './app.module';
 import { LoggerService } from './logger';
 
@@ -10,10 +11,13 @@ async function bootstrap() {
     logger: new LoggerService(),
   });
 
+  app.use(helmet());
+
   const config = new DocumentBuilder()
     .setTitle('Human Resources API')
     .setDescription('The Human Resources API software.')
     .setVersion('1.0')
+    .addBearerAuth()
     .build();
 
   const document = SwaggerModule.createDocument(app, config);

@@ -7,12 +7,15 @@ import {
   Post,
   Put,
   Res,
+  UseGuards,
 } from '@nestjs/common';
 import { Response } from 'express';
+import { AuthenticationGuard } from 'src/authentication';
 import { CreateEmployeeDto, UpdateEmployeeDto } from './dto';
 import { EmployeeService } from './employee.service';
 
 @Controller('employees')
+@UseGuards(AuthenticationGuard)
 export class EmployeeController {
   constructor(private readonly employeeService: EmployeeService) {}
 

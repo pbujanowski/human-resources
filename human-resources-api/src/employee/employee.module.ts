@@ -17,6 +17,7 @@ import {
 } from './events';
 import { GetAllEmployeesHandler, GetEmployeeByIdHandler } from './queries';
 import { AppEventModule } from '../app-event';
+import { AuthenticationModule } from 'src/authentication';
 
 const CommandHandlers = [
   CreateEmployeeHandler,
@@ -33,6 +34,7 @@ const QueryHandlers = [GetAllEmployeesHandler, GetEmployeeByIdHandler];
 @Module({
   imports: [
     AppEventModule,
+    AuthenticationModule,
     CqrsModule,
     LoggerModule,
     TypeOrmModule.forFeature([Employee]),

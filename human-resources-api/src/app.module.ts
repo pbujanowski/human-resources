@@ -6,6 +6,7 @@ import { DatabaseModule } from './database';
 import { EmployeeModule } from './employee';
 import { LoggerModule } from './logger';
 import { AppEventModule } from './app-event';
+import { AuthenticationModule } from './authentication';
 
 @Module({
   imports: [
@@ -14,6 +15,7 @@ import { AppEventModule } from './app-event';
     AppEventModule,
     EmployeeModule,
     LoggerModule,
+    AuthenticationModule,
   ],
   controllers: [AppController],
   providers: [AppService],

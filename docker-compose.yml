@@ -54,7 +54,7 @@ services:
       - $CLIENT_PORT:$CLIENT_PORT_EXPOSE
 
   identity:
-    image: bitnami/keycloak:19-debian-11
+    image: bitnami/keycloak:20-debian-11
     container_name: human-resources-identity
     restart: unless-stopped
     env_file:
@@ -71,6 +71,8 @@ services:
       - KEYCLOAK_DATABASE_NAME=$IDENTITY_DATABASE_NAME
       - KEYCLOAK_DATABASE_USER=$IDENTITY_DATABASE_USER_NAME
       - KEYCLOAK_DATABASE_PASSWORD=$IDENTITY_DATABASE_USER_PASSWORD
+
+      - KEYCLOAK_ENABLE_STATISTICS=true
     ports:
       - $IDENTITY_PORT:$IDENTITY_PORT_EXPOSE
     depends_on:
