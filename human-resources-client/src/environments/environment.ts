@@ -3,5 +3,4 @@ export const environment = {
   apiUrl: 'http://localhost:5000',
   clientAuthority: 'http://localhost:8080/realms/human-resources',
   clientId: 'human-resources-client',
-  clientUrl: 'http://localhost:4200',
 };

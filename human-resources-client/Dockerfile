@@ -5,12 +5,10 @@ WORKDIR /app
 ARG API_URL
 ARG CLIENT_AUTHORITY
 ARG CLIENT_ID
-ARG CLIENT_URL
 
 ENV API_URL $API_URL
 ENV CLIENT_AUTHORITY $CLIENT_AUTHORITY
 ENV CLIENT_ID $CLIENT_ID
-ENV CLIENT_URL $CLIENT_URL
 
 COPY package.json yarn.lock ./
 
@@ -18,7 +16,6 @@ RUN yarn install
 
 COPY . .
 
-RUN npm install -g @angular/cli
 RUN yarn build
 
 FROM nginx:stable-alpine as production

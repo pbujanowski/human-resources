@@ -14,7 +14,7 @@
   "license": "MIT",
   "scripts": {
     "ng": "ng",
-    "set-environment": "cross-env-shell ts-node ./scripts/set-environment.ts --apiUrl=$API_URL --authority=$AUTHORITY --clientId=$CLIENT_ID --clientUrl=$CLIENT_URL",
+    "set-environment": "cross-env-shell ts-node ./scripts/set-environment.ts --apiUrl=$API_URL --clientAuthority=$CLIENT_AUTHORITY --clientId=$CLIENT_ID",
     "set-environment-development": "yarn set-environment --environment=development",
     "set-environment-production": "yarn set-environment --environment=production",
     "prestart": "yarn set-environment-development",
