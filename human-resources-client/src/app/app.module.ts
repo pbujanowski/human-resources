@@ -58,12 +58,12 @@ registerLocaleData(en);
     AuthenticationModule.forRoot({
       authority: environment.clientAuthority,
       clientId: environment.clientId,
-      redirectUri: `${window.location.href}/login-callback`,
+      redirectUri: `${window.location.origin}/login-callback`,
       responseType: 'code',
       scope: 'openid profile email',
-      postLogoutRedirectUri: `${window.location.href}/logout-callback`,
+      postLogoutRedirectUri: `${window.location.origin}/logout-callback`,
       automaticSilentRenew: true,
-      silentRedirectUri: `${window.location.href}/silent-callback`,
+      silentRedirectUri: `${window.location.origin}/silent-callback`,
     }),
   ],
   providers: [

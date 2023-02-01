@@ -1,0 +1,14 @@
+version: "3.9"
+
+services:
+  api:
+    build:
+      dockerfile: Dockerfile.development
+    environment:
+      - NODE_ENV=development
+
+  client:
+    build:
+      dockerfile: Dockerfile.development
+    environment:
+      - NODE_ENV=development

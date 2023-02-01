@@ -27,33 +27,31 @@ export class AuthenticationService {
   public readonly getClaims = () => this._user?.profile;
 
   public readonly startAuthentication = async () => {
-    this.getUserManager();
+    await this.getUserManager();
     await this._userManager?.signinRedirect();
   };
 
   public readonly completeAuthentication = async () => {
-    this.getUserManager();
-    return this._userManager?.signinRedirectCallback().then(user => {
-      this._user = user;
-    });
+    await this.getUserManager();
+    this._user = await this._userManager?.signinRedirectCallback();
   };
 
   public readonly startLogout = async () => {
-    this.getUserManager();
+    await this.getUserManager();
     return await this._userManager?.signoutRedirect();
   };
 
   public readonly completeLogout = async () => {
-    this.getUserManager();
+    await this.getUserManager();
     return await this._userManager?.signoutRedirectCallback();
   };
 
   public readonly silentAuthentication = async () => {
-    this.getUserManager();
+    await this.getUserManager();
     return await this._userManager?.signinSilentCallback();
   };
 
-  private readonly getUserManager = () => {
+  private readonly getUserManager = async () => {
     if (!this._userManager) {
       const userManagerSettings: UserManagerSettings = {
         authority: this._config.authority,
@@ -69,9 +67,7 @@ export class AuthenticationService {
         }),
       };
       this._userManager = new UserManager(userManagerSettings);
-      this._userManager.getUser().then(user => {
-        this._user = user;
-      });
+      this._user = await this._userManager.getUser();
     }
   };
 

@@ -1,0 +1,11 @@
+FROM node:16.18-alpine3.15 AS development
+
+WORKDIR /usr/src/app
+
+COPY package.json yarn.lock ./
+
+RUN yarn install
+
+COPY . .
+
+CMD [ "yarn", "start" ]

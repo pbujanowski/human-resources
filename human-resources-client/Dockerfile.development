@@ -1,0 +1,20 @@
+FROM node:16.18-alpine3.15 as development
+
+WORKDIR /app
+
+ARG API_URL
+ARG CLIENT_AUTHORITY
+ARG CLIENT_ID
+
+ENV API_URL $API_URL
+ENV CLIENT_AUTHORITY $CLIENT_AUTHORITY
+ENV CLIENT_ID $CLIENT_ID
+
+COPY package.json yarn.lock ./
+
+RUN yarn install
+
+COPY . .
+
+EXPOSE ${CLIENT_PORT_EXPOSE}
+CMD ["yarn", "start"]
