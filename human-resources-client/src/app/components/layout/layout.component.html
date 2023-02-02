@@ -1,5 +1,7 @@
 <mat-toolbar color="primary" fxLayout="row">
-  <span>Human Resources</span>
+  <button mat-button (click)="onHomeClick()">
+    <span>Human Resources</span>
+  </button>
   <div fxFlex fxLayout="row" fxLayoutAlign="flex-start" fxHide.lt-sm>
     <ul fxLayout fxLayoutGap="20px">
       <a mat-button [matMenuTriggerFor]="homeMenu">
@@ -12,7 +14,7 @@
         *ngIf="isLoggedIn(); then loggedInAnchor; else loggedOutAnchor">
       </ng-container>
       <ng-template #loggedInAnchor>
-        <a mat-button>
+        <a mat-button (click)="onProfileClick()">
           {{ getUserClaims()?.email }}
         </a>
         <a mat-button (click)="onLogoutClick()">
@@ -47,7 +49,7 @@
           else loggedOutButton
         "></ng-container>
       <ng-template #loggedInButton>
-        <button mat-menu-item>
+        <button mat-menu-item (click)="onProfileClick()">
           {{ getUserClaims()?.email }}
         </button>
         <button mat-menu-item (click)="onLogoutClick()">

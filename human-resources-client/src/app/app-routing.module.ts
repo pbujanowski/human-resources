@@ -14,6 +14,11 @@ const routes: Routes = [
     loadChildren: () =>
       import('./pages/employees').then(m => m.EmployeesModule),
   },
+  {
+    path: 'profile',
+    canActivate: [AuthenticationGuard],
+    loadChildren: () => import('./pages/profile').then(m => m.ProfileModule),
+  },
 ];
 
 @NgModule({

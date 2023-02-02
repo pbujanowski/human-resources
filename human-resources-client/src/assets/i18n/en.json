@@ -4,6 +4,7 @@
     "home": "Home",
     "login": "Login",
     "logout": "Logout",
+    "profile": "Profile",
     "dashboard": "Dashboard",
     "employees": "Employees",
     "employeesList": "List"

@@ -51,6 +51,10 @@ export class LayoutComponent {
 
   public readonly getUserClaims = () => this._authenticationService.getClaims();
 
+  public readonly onHomeClick = () => this._router.navigate(['']);
+
+  public readonly onProfileClick = () => this._router.navigate(['profile']);
+
   public readonly onLoginClick = () => this._router.navigate(['login']);
 
   public readonly onLogoutClick = () => this._router.navigate(['logout']);
