@@ -5,6 +5,9 @@ export class Employee {
   @PrimaryGeneratedColumn('uuid', { name: 'id' })
   id: string;
 
+  @Column('uuid', { name: 'user_id' })
+  userId: string;
+
   @Column('nvarchar', { name: 'first_name', length: 50 })
   firstName: string;
 
