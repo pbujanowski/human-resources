@@ -1,6 +1,6 @@
 import { EventsHandler, IEventHandler } from '@nestjs/cqrs';
-import { AppEventService } from '../../app-event';
-import { LoggerService } from '../../logger';
+import { AppEventService } from 'src/app-event';
+import { LoggerService } from 'src/logger';
 import { EmployeeCreatedEvent } from './employee-created.event';
 
 @EventsHandler(EmployeeCreatedEvent)

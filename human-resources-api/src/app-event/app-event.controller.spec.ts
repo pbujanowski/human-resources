@@ -1,5 +1,7 @@
 import { CqrsModule } from '@nestjs/cqrs';
 import { Test, TestingModule } from '@nestjs/testing';
+
+import { AuthenticationModule } from 'src/authentication';
 import { AppEventController } from './app-event.controller';
 import { AppEventService } from './app-event.service';
 
@@ -8,7 +10,7 @@ describe('AppEventController', () => {
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
-      imports: [CqrsModule],
+      imports: [AuthenticationModule, CqrsModule],
       controllers: [AppEventController],
       providers: [AppEventService],
     }).compile();

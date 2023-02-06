@@ -1,5 +1,7 @@
 import { CqrsModule } from '@nestjs/cqrs';
 import { Test, TestingModule } from '@nestjs/testing';
+
+import { AuthenticationModule } from 'src/authentication';
 import { EmployeeController } from './employee.controller';
 import { EmployeeService } from './employee.service';
 
@@ -8,7 +10,7 @@ describe('EmployeeController', () => {
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
-      imports: [CqrsModule],
+      imports: [AuthenticationModule, CqrsModule],
       controllers: [EmployeeController],
       providers: [EmployeeService],
     }).compile();

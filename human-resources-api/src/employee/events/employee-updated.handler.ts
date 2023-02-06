@@ -1,5 +1,5 @@
 import { EventsHandler, IEventHandler } from '@nestjs/cqrs';
-import { LoggerService } from '../../logger';
+import { LoggerService } from 'src/logger';
 import { EmployeeUpdatedEvent } from './employee-updated.event';
 
 @EventsHandler(EmployeeUpdatedEvent)

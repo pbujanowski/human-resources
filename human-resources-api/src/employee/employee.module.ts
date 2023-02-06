@@ -1,8 +1,10 @@
 import { Module } from '@nestjs/common';
 import { CqrsModule } from '@nestjs/cqrs';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { AppEventModule } from 'src/app-event';
+import { AuthenticationModule } from 'src/authentication';
+import { LoggerModule } from 'src/logger';
 import { Employee } from './entities';
-import { LoggerModule } from '../logger';
 import {
   CreateEmployeeHandler,
   DeleteEmployeeHandler,
@@ -16,8 +18,6 @@ import {
   EmployeeUpdatedHandler,
 } from './events';
 import { GetAllEmployeesHandler, GetEmployeeByIdHandler } from './queries';
-import { AppEventModule } from '../app-event';
-import { AuthenticationModule } from 'src/authentication';
 
 const CommandHandlers = [
   CreateEmployeeHandler,
